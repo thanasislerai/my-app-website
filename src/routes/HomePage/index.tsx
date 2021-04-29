@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Typography, Button, useTheme } from "@material-ui/core";
 
 const HomePage = () => {

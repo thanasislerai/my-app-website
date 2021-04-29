@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import { ThemeProvider } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
