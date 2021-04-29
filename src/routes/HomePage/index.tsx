@@ -1,7 +1,9 @@
-import { Box, Typography } from "@material-ui/core";
 import React from "react";
+import { Box, Typography, Button, useTheme } from "@material-ui/core";
 
 const HomePage = () => {
+  const theme = useTheme();
+
   return (
     <Box
       flexGrow={1}
@@ -9,14 +11,16 @@ const HomePage = () => {
       alignItems="center"
       justifyContent="center"
       textAlign="center"
-      bgcolor="#0d1117"
+      bgcolor={theme.palette.background.default}
     >
-      <Typography
-        color="textSecondary" 
-        variant="h2"
-      >
-        Welcome!!
-      </Typography>
+      <Box>
+        <Typography color="textSecondary" variant="h2" gutterBottom>
+          Welcome!!
+        </Typography>
+        <Button variant="contained" color="primary">
+          Start Journey
+        </Button>
+      </Box>
     </Box>
   );
 };

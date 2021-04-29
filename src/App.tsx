@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "./App.css";
 import { ThemeProvider } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import theme from "./theme";
 import NavBar from "./common/NavBar";
 import HomePage from "./routes/HomePage";
-import NotFound from './common/NotFound';
+import NotFound from "./common/NotFound";
 
 function App() {
   return (

@@ -9,14 +9,13 @@ import {
   WithStyles,
   withStyles,
   Typography,
-  Theme
+  Theme,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import blue from "@material-ui/core/colors/blue";
 
 const NavBar = ({ classes }: NavBarProps) => {
   return (
-    <AppBar className={classes.root} position="static">
+    <AppBar position="static">
       <Toolbar>
         <Grid container alignItems="center" justify="space-between">
           <Grid item>
@@ -28,12 +27,16 @@ const NavBar = ({ classes }: NavBarProps) => {
             <Grid container spacing={2}>
               <Grid item>
                 <Button>
-                  <Typography color="textSecondary" variant="subtitle2">Sign in</Typography>
+                  <Typography color="textSecondary" variant="subtitle2">
+                    Sign in
+                  </Typography>
                 </Button>
               </Grid>
               <Grid item>
                 <Button>
-                  <Typography color="textSecondary" variant="subtitle2">Sign up</Typography>
+                  <Typography color="textSecondary" variant="subtitle2">
+                    Sign up
+                  </Typography>
                 </Button>
               </Grid>
             </Grid>
@@ -46,9 +49,6 @@ const NavBar = ({ classes }: NavBarProps) => {
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
-      backgroundColor: blue[900],
-    },
     menuIcon: {
       color: theme.palette.text.secondary,
     },
