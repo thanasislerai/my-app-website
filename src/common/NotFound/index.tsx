@@ -14,7 +14,7 @@ const NotFound = () => {
       bgcolor={theme.palette.background.default}
     >
       <Box>
-        <Typography color="textSecondary" variant="h2" gutterBottom>
+        <Typography color="textPrimary" variant="h2" gutterBottom>
           Page Not Found
         </Typography>
         <Button variant="contained" color="primary" component={Link} to="/">

@@ -1,42 +1,23 @@
-import {
-  AppBar,
-  Button,
-  Toolbar,
-  Grid,
-  IconButton,
-  createStyles,
-  WithStyles,
-  withStyles,
-  Typography,
-  Theme,
-} from "@material-ui/core";
+import { AppBar, Button, Toolbar, Grid, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
-const NavBar = ({ classes }: NavBarProps) => {
+const NavBar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
         <Grid container alignItems="center" justify="space-between">
           <Grid item>
-            <IconButton className={classes.menuIcon}>
+            <IconButton>
               <MenuIcon />
             </IconButton>
           </Grid>
           <Grid item>
             <Grid container spacing={2}>
               <Grid item>
-                <Button>
-                  <Typography color="textSecondary" variant="subtitle2">
-                    Sign in
-                  </Typography>
-                </Button>
+                <Button>Sign In</Button>
               </Grid>
               <Grid item>
-                <Button>
-                  <Typography color="textSecondary" variant="subtitle2">
-                    Sign up
-                  </Typography>
-                </Button>
+                <Button>Sign up</Button>
               </Grid>
             </Grid>
           </Grid>
@@ -46,13 +27,4 @@ const NavBar = ({ classes }: NavBarProps) => {
   );
 };
 
-const styles = (theme: Theme) =>
-  createStyles({
-    menuIcon: {
-      color: theme.palette.text.secondary,
-    },
-  });
-
-type NavBarProps = WithStyles<typeof styles>;
-
-export default withStyles(styles)(NavBar);
+export default NavBar;
