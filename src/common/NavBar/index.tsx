@@ -5,12 +5,15 @@ import {
   Grid,
   IconButton,
   PaletteType,
+  Tooltip,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
 import Brightness4RoundedIcon from "@material-ui/icons/Brightness4Rounded";
 
 const NavBar = ({ themeType, handleThemeTypeChange }: NavBarIncomingProps) => {
+  const isThemeDark = themeType === "dark";
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -23,19 +26,22 @@ const NavBar = ({ themeType, handleThemeTypeChange }: NavBarIncomingProps) => {
           <Grid item>
             <Grid container alignItems="center" spacing={2}>
               <Grid item>
-                <IconButton
-                  onClick={() =>
-                    handleThemeTypeChange(
-                      themeType === "dark" ? "light" : "dark"
-                    )
-                  }
+                <Tooltip
+                  arrow
+                  title={`Switch to ${isThemeDark ? "light" : "dark"} theme`}
                 >
-                  {themeType === "dark" ? (
-                    <Brightness7RoundedIcon />
-                  ) : (
-                    <Brightness4RoundedIcon />
-                  )}
-                </IconButton>
+                  <IconButton
+                    onClick={() =>
+                      handleThemeTypeChange(isThemeDark ? "light" : "dark")
+                    }
+                  >
+                    {isThemeDark ? (
+                      <Brightness7RoundedIcon />
+                    ) : (
+                      <Brightness4RoundedIcon />
+                    )}
+                  </IconButton>
+                </Tooltip>
               </Grid>
               <Grid item>
                 <Button>Sign In</Button>
