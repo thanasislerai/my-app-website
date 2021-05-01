@@ -11,10 +11,10 @@ const theme = (type?: PaletteType) =>
       palette: {
         type,
         primary: {
-          main: blue[900],
+          main: type === "dark" ? blue[900] : blue[600],
         },
         background: {
-          default: "#0d1117",
+          default: type === "dark" ? "#0d1117" : undefined,
         },
       },
     })
