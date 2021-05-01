@@ -9,7 +9,7 @@ import NotFound from "./common/NotFound";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme("dark")}>
       <NavBar />
       <Router>
         <Switch>
