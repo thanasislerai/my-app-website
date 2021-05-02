@@ -10,6 +10,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
 import Brightness4RoundedIcon from "@material-ui/icons/Brightness4Rounded";
+import { Link } from "react-router-dom";
 
 const NavBar = ({ themeType, handleThemeTypeChange }: NavBarIncomingProps) => {
   const isThemeDark = themeType === "dark";
@@ -44,7 +45,9 @@ const NavBar = ({ themeType, handleThemeTypeChange }: NavBarIncomingProps) => {
                 </Tooltip>
               </Grid>
               <Grid item>
-                <Button>Sign In</Button>
+                <Button component={Link} to="/login">
+                  Sign In
+                </Button>
               </Grid>
               <Grid item>
                 <Button>Sign up</Button>

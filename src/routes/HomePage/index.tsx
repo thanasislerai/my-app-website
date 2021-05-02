@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Box, Typography, Button, useTheme, Fade } from "@material-ui/core";
+import { Box, Typography, Button, Fade } from "@material-ui/core";
 
 import HomePageCards from "./Cards";
+import FullScreenWrapper from "../../common/FullScreenWrapper";
 
 const HomePage = () => {
-  const theme = useTheme();
   const [startButtonClicked, setStartButtonClicked] = useState(false);
   const [startAnimationFinished, setStartAnimationFinished] = useState(false);
 
@@ -12,14 +12,7 @@ const HomePage = () => {
   const handleStartAnimationFinish = () => setStartAnimationFinished(true);
 
   return (
-    <Box
-      flexGrow={1}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      textAlign="center"
-      bgcolor={theme.palette.background.default}
-    >
+    <FullScreenWrapper>
       <Fade
         disableStrictModeCompat
         in={!startButtonClicked}
@@ -45,7 +38,7 @@ const HomePage = () => {
           <HomePageCards />
         </Fade>
       )}
-    </Box>
+    </FullScreenWrapper>
   );
 };
 

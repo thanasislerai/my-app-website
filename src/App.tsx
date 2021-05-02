@@ -7,6 +7,7 @@ import theme from "./theme";
 import NavBar from "./common/NavBar";
 import HomePage from "./routes/HomePage";
 import NotFound from "./common/NotFound";
+import SignIn from "./routes/SignIn";
 
 function App() {
   const [themeType, setThemeType] = useState<PaletteType>("dark");
@@ -15,13 +16,14 @@ function App() {
 
   return (
     <ThemeProvider theme={theme(themeType)}>
-      <NavBar
-        themeType={themeType}
-        handleThemeTypeChange={handleThemeTypeChange}
-      />
       <Router>
+        <NavBar
+          themeType={themeType}
+          handleThemeTypeChange={handleThemeTypeChange}
+        />
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={SignIn} />
           <Route component={NotFound} />
         </Switch>
       </Router>
