@@ -8,7 +8,6 @@ import {
   WithStyles,
   withStyles,
 } from "@material-ui/core";
-import green from "@material-ui/core/colors/green";
 
 import FullScreenWrapper from "../../common/FullScreenWrapper";
 
@@ -38,12 +37,7 @@ const SignIn = ({ classes }: SignInProps) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button
-                className={classes.signInButton}
-                fullWidth
-                color="primary"
-                variant="contained"
-              >
+              <Button fullWidth color="secondary" variant="contained">
                 Sign in
               </Button>
             </Grid>
@@ -62,13 +56,6 @@ const styles = () =>
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-    },
-    signInButton: {
-      backgroundColor: green[600],
-
-      "&:hover": {
-        backgroundColor: green[800],
-      },
     },
   });
 
