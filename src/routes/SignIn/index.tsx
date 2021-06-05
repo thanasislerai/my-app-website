@@ -15,9 +15,14 @@ import FullScreenWrapper from "../../common/FullScreenWrapper";
 const SignIn = ({ classes }: SignInProps) => {
   return (
     <FullScreenWrapper>
-      <Container>
-        <Typography color="textPrimary" variant="h5" gutterBottom>
-          Sign in
+      <Container className={classes.signInWrapper}>
+        <Typography
+          align="center"
+          color="textPrimary"
+          variant="h5"
+          gutterBottom
+        >
+          Sign In
         </Typography>
         <Grid container justify="center">
           <Grid container spacing={3} item lg={3} md={5} sm={8} xs={11}>
@@ -51,6 +56,13 @@ const SignIn = ({ classes }: SignInProps) => {
 
 const styles = () =>
   createStyles({
+    signInWrapper: {
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    },
     signInButton: {
       backgroundColor: green[600],
 

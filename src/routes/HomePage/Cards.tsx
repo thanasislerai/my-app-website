@@ -66,8 +66,11 @@ const HomePageCards = ({ classes }: HomePageCardsProps) => (
 const styles = () =>
   createStyles({
     root: {
-      marginTop: 32,
-      marginBottom: 32,
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
     card: {
       minHeight: 400,

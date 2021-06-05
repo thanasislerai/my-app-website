@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { Box, Button, Typography } from "@material-ui/core";
-import FullScreenWrapper from "../FullScreenWrapper";
 
-const NotFound = () => (
-  <FullScreenWrapper>
+const Welcome = ({ onStartButtonClick }: WelcomeProps) => {
+  return (
     <Box
       height="100%"
       display="flex"
@@ -12,13 +10,17 @@ const NotFound = () => (
       justifyContent="center"
     >
       <Typography align="center" color="textPrimary" variant="h2" gutterBottom>
-        Page Not Found
+        Welcome!!
       </Typography>
-      <Button variant="contained" color="primary" component={Link} to="/">
-        Back To Home
+      <Button onClick={onStartButtonClick} variant="contained" color="primary">
+        Start Journey
       </Button>
     </Box>
-  </FullScreenWrapper>
-);
+  );
+};
 
-export default NotFound;
+interface WelcomeProps {
+  onStartButtonClick: () => void;
+}
+
+export default Welcome;
