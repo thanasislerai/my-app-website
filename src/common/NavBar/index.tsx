@@ -9,6 +9,9 @@ import {
   Tooltip,
   useTheme,
   useMediaQuery,
+  createStyles,
+  WithStyles,
+  withStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
@@ -17,7 +20,7 @@ import { Link } from "react-router-dom";
 
 import SideMenu from "../SideMenu";
 
-const NavBar = ({ themeType, handleThemeTypeChange }: NavBarIncomingProps) => {
+const NavBar = ({ themeType, handleThemeTypeChange, classes }: NavBarProps) => {
   const isThemeDark = themeType === "dark";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const theme = useTheme();
@@ -41,7 +44,12 @@ const NavBar = ({ themeType, handleThemeTypeChange }: NavBarIncomingProps) => {
           </Grid>
           {!isMobile && (
             <Grid item>
-              <Grid container alignItems="center" spacing={2}>
+              <Grid
+                className={classes.buttonGroup}
+                container
+                alignItems="center"
+                spacing={2}
+              >
                 <Grid item>
                   <Tooltip
                     arrow
@@ -83,4 +91,13 @@ type NavBarIncomingProps = {
   handleThemeTypeChange: (type: PaletteType) => void;
 };
 
-export default NavBar;
+const styles = () =>
+  createStyles({
+    buttonGroup: {
+      width: "auto",
+    },
+  });
+
+type NavBarProps = NavBarIncomingProps & WithStyles<typeof styles>;
+
+export default withStyles(styles)(NavBar);
