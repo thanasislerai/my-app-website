@@ -17,6 +17,7 @@ import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
 import Brightness4RoundedIcon from "@material-ui/icons/Brightness4Rounded";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 
 const SideMenu = ({
@@ -45,6 +46,24 @@ const SideMenu = ({
         </Grid>
       </Grid>
       <List>
+        <ListItem button onClick={onMenuClose} component={Link} to="/">
+          <ListItemAvatar>
+            <HomeIcon />
+          </ListItemAvatar>
+          <ListItemText>HOME</ListItemText>
+        </ListItem>
+        <ListItem button onClick={onMenuClose} component={Link} to="/login">
+          <ListItemAvatar>
+            <ExitToAppIcon />
+          </ListItemAvatar>
+          <ListItemText>SIGN IN</ListItemText>
+        </ListItem>
+        <ListItem button onClick={onMenuClose}>
+          <ListItemAvatar>
+            <PersonAddIcon />
+          </ListItemAvatar>
+          <ListItemText>SIGN UP</ListItemText>
+        </ListItem>
         <ListItem
           button
           onClick={() => {
@@ -62,18 +81,6 @@ const SideMenu = ({
           <ListItemText>
             USE {themeType === "dark" ? "LIGHT" : "DARK"} THEME
           </ListItemText>
-        </ListItem>
-        <ListItem button onClick={onMenuClose} component={Link} to="/login">
-          <ListItemAvatar>
-            <ExitToAppIcon />
-          </ListItemAvatar>
-          <ListItemText>SIGN IN</ListItemText>
-        </ListItem>
-        <ListItem button onClick={onMenuClose}>
-          <ListItemAvatar>
-            <PersonAddIcon />
-          </ListItemAvatar>
-          <ListItemText>SIGN UP</ListItemText>
         </ListItem>
       </List>
     </SwipeableDrawer>
