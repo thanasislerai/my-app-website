@@ -21,11 +21,7 @@ const HomePageCards = ({ classes }: HomePageCardsProps) => (
       <Grid item md={4} sm={6} xs={12}>
         <Card className={classes.card} variant="outlined">
           <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={athensImage}
-              title="Contemplative Reptile"
-            />
+            <CardMedia className={classes.media} image={athensImage} />
             <CardContent>
               <Typography
                 align="justify"
