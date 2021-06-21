@@ -1,26 +1,17 @@
-import { useState } from "react";
 import "./App.css";
-import { PaletteType, ThemeProvider } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import theme from "./theme";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import NavBar from "./common/NavBar";
 import HomePage from "./routes/HomePage";
 import NotFound from "./common/NotFound";
 import SignIn from "./routes/SignIn";
 
 function App() {
-  const [themeType, setThemeType] = useState<PaletteType>("dark");
-
-  const handleThemeTypeChange = (type: PaletteType) => setThemeType(type);
-
   return (
-    <ThemeProvider theme={theme(themeType)}>
+    <ThemeProvider>
       <Router>
-        <NavBar
-          themeType={themeType}
-          handleThemeTypeChange={handleThemeTypeChange}
-        />
+        <NavBar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={SignIn} />

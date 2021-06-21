@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   AppBar,
   Button,
   Toolbar,
   Grid,
   IconButton,
-  PaletteType,
   Tooltip,
   useTheme,
   useMediaQuery,
@@ -19,8 +18,10 @@ import Brightness4RoundedIcon from "@material-ui/icons/Brightness4Rounded";
 import { Link } from "react-router-dom";
 
 import SideMenu from "../SideMenu";
+import ThemeContext from "../../contexts/ThemeContext";
 
-const NavBar = ({ themeType, handleThemeTypeChange, classes }: NavBarProps) => {
+const NavBar = ({ classes }: NavBarProps) => {
+  const { themeType, handleThemeTypeChange } = useContext(ThemeContext);
   const isThemeDark = themeType === "dark";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const theme = useTheme();
@@ -31,10 +32,8 @@ const NavBar = ({ themeType, handleThemeTypeChange, classes }: NavBarProps) => {
       <Toolbar>
         <SideMenu
           isMenuOpen={isMenuOpen}
-          themeType={themeType}
           onMenuClose={() => setIsMenuOpen(false)}
           onMenuOpen={() => setIsMenuOpen(true)}
-          handleThemeTypeChange={handleThemeTypeChange}
         />
         <Grid container alignItems="center" justify="space-between">
           <Grid item>
@@ -85,12 +84,6 @@ const NavBar = ({ themeType, handleThemeTypeChange, classes }: NavBarProps) => {
   );
 };
 
-type NavBarIncomingProps = {
-  themeType: PaletteType;
-  // eslint-disable-next-line no-unused-vars
-  handleThemeTypeChange: (type: PaletteType) => void;
-};
-
 const styles = () =>
   createStyles({
     buttonGroup: {
@@ -98,6 +91,6 @@ const styles = () =>
     },
   });
 
-type NavBarProps = NavBarIncomingProps & WithStyles<typeof styles>;
+type NavBarProps = WithStyles<typeof styles>;
 
 export default withStyles(styles)(NavBar);

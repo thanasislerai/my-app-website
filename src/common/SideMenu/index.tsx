@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   SwipeableDrawer,
   withStyles,
@@ -10,7 +11,6 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  PaletteType,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
@@ -20,14 +20,15 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 
+import ThemeContext from "../../contexts/ThemeContext";
+
 const SideMenu = ({
   isMenuOpen,
-  themeType,
   onMenuOpen,
   onMenuClose,
-  handleThemeTypeChange,
   classes,
 }: SideMenuProps) => {
+  const { themeType, handleThemeTypeChange } = useContext(ThemeContext);
   const isThemeDark = themeType === "dark";
 
   return (
@@ -98,11 +99,8 @@ const styles = (theme: Theme) =>
 
 interface SideMenuIncomingProps {
   isMenuOpen: boolean;
-  themeType: PaletteType;
   onMenuOpen: () => void;
   onMenuClose: () => void;
-  // eslint-disable-next-line no-unused-vars
-  handleThemeTypeChange: (type: PaletteType) => void;
 }
 
 type SideMenuProps = SideMenuIncomingProps & WithStyles<typeof styles>;
