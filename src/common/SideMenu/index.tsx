@@ -18,9 +18,11 @@ import Brightness4RoundedIcon from "@material-ui/icons/Brightness4Rounded";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import HomeIcon from "@material-ui/icons/Home";
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { Link } from "react-router-dom";
 
 import ThemeContext from "../../contexts/ThemeContext";
+import UserContext from "../../contexts/UserContext";
 
 const SideMenu = ({
   isMenuOpen,
@@ -29,6 +31,7 @@ const SideMenu = ({
   classes,
 }: SideMenuProps) => {
   const { themeType, handleThemeTypeChange } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
   const isThemeDark = themeType === "dark";
 
   return (
@@ -53,18 +56,29 @@ const SideMenu = ({
           </ListItemAvatar>
           <ListItemText>HOME</ListItemText>
         </ListItem>
-        <ListItem button onClick={onMenuClose} component={Link} to="/login">
-          <ListItemAvatar>
-            <ExitToAppIcon />
-          </ListItemAvatar>
-          <ListItemText>SIGN IN</ListItemText>
-        </ListItem>
-        <ListItem button onClick={onMenuClose}>
-          <ListItemAvatar>
-            <PersonAddIcon />
-          </ListItemAvatar>
-          <ListItemText>SIGN UP</ListItemText>
-        </ListItem>
+        {user?.email ? (
+          <ListItem button>
+            <ListItemAvatar>
+              <PowerSettingsNewIcon />
+            </ListItemAvatar>
+            <ListItemText>LOG OUT</ListItemText>
+          </ListItem>
+        ) : (
+          <>
+            <ListItem button onClick={onMenuClose} component={Link} to="/login">
+              <ListItemAvatar>
+                <ExitToAppIcon />
+              </ListItemAvatar>
+              <ListItemText>SIGN IN</ListItemText>
+            </ListItem>
+            <ListItem button onClick={onMenuClose}>
+              <ListItemAvatar>
+                <PersonAddIcon />
+              </ListItemAvatar>
+              <ListItemText>SIGN UP</ListItemText>
+            </ListItem>
+          </>
+        )}
         <ListItem
           button
           onClick={() => {

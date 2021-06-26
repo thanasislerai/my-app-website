@@ -1,3 +1,4 @@
+import { useContext, useState } from "react";
 import {
   Container,
   Button,
@@ -7,11 +8,15 @@ import {
   createStyles,
   WithStyles,
   withStyles,
+  CircularProgress,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import isEmail from "validator/lib/isEmail";
+import { Redirect } from "react-router-dom";
 
 import FullScreenWrapper from "../../common/FullScreenWrapper";
+import UserContext from "../../contexts/UserContext";
+import userServices from "../../services/userServices";
 
 interface SignInParams {
   email: string;
@@ -19,17 +24,28 @@ interface SignInParams {
 }
 
 const SignIn = ({ classes }: SignInProps) => {
+  const { user, setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignInParams>({});
 
-  // eslint-disable-next-line no-console
-  const onSignInFormSubmit = (data: SignInParams) => console.log(data);
+  const onSignInFormSubmit = ({ email, password }: SignInParams) => {
+    setLoading(true);
+    userServices
+      .signIn(email, password)
+      .then((resp) => {
+        setUser({ email: resp.user?.email });
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  };
 
   return (
     <FullScreenWrapper>
+      {user && <Redirect to="/" />}
       <Container className={classes.signInWrapper}>
         <Typography
           align="center"
@@ -82,12 +98,21 @@ const SignIn = ({ classes }: SignInProps) => {
               </Grid>
               <Grid item xs={12}>
                 <Button
+                  disabled={loading}
                   type="submit"
                   fullWidth
                   color="secondary"
                   variant="contained"
                 >
-                  Sign in
+                  {loading ? (
+                    <CircularProgress
+                      size={24}
+                      thickness={2.4}
+                      color="primary"
+                    />
+                  ) : (
+                    "Sign in"
+                  )}
                 </Button>
               </Grid>
             </Grid>

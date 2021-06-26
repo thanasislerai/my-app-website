@@ -11,6 +11,7 @@ import {
   createStyles,
   WithStyles,
   withStyles,
+  Typography,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
@@ -20,9 +21,11 @@ import { Link } from "react-router-dom";
 
 import SideMenu from "../SideMenu";
 import ThemeContext from "../../contexts/ThemeContext";
+import UserContext from "../../contexts/UserContext";
 
 const NavBar = ({ classes }: NavBarProps) => {
   const { themeType, handleThemeTypeChange } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
   const isThemeDark = themeType === "dark";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const theme = useTheme();
@@ -73,14 +76,24 @@ const NavBar = ({ classes }: NavBarProps) => {
                     </IconButton>
                   </Tooltip>
                 </Grid>
-                <Grid item>
-                  <Button component={Link} to="/login">
-                    Sign In
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button>Sign up</Button>
-                </Grid>
+                {user?.email ? (
+                  <Grid item>
+                    <Typography color="textPrimary">
+                      Hi, {user.email.split("@")?.[0]}
+                    </Typography>
+                  </Grid>
+                ) : (
+                  <>
+                    <Grid item>
+                      <Button component={Link} to="/login">
+                        Sign In
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button>Sign up</Button>
+                    </Grid>
+                  </>
+                )}
               </Grid>
             </Grid>
           )}
