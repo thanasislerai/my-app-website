@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Card,
   CardActionArea,
@@ -13,51 +14,61 @@ import {
   Grid,
 } from "@material-ui/core";
 
-import athensImage from "../../assets/images/athens.jpg";
+import ThemeContext from "../../contexts/ThemeContext";
 
-const HomePageCards = ({ classes }: HomePageCardsProps) => (
-  <Container className={classes.root}>
-    <Grid container spacing={4}>
-      <Grid item md={4} sm={6} xs={12}>
-        <Card className={classes.card} variant="outlined">
-          <CardActionArea>
-            <CardMedia className={classes.media} image={athensImage} />
-            <CardContent>
-              <Typography
-                align="justify"
-                gutterBottom
-                variant="h5"
-                component="h2"
-              >
-                Athens
-              </Typography>
-              <Typography
-                align="justify"
-                variant="body2"
-                color="textSecondary"
-                component="p"
-              >
-                Athens is the capital and largest city of Greece. Athens
-                dominates the Attica region and is one of the world&#39;s oldest
-                cities, with its recorded history spanning over 3,400 years and
-                its earliest human presence started somewhere between the 11th
-                and 7th millennium BC.
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button variant="outlined" size="small">
-              Share
-            </Button>
-            <Button variant="outlined" size="small">
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
+import athensDay from "../../assets/images/athens-day.jpg";
+import athensNight from "../../assets/images/athens-night.jpg";
+
+const HomePageCards = ({ classes }: HomePageCardsProps) => {
+  const { themeType } = useContext(ThemeContext);
+
+  return (
+    <Container className={classes.root}>
+      <Grid container spacing={4}>
+        <Grid item md={4} sm={6} xs={12}>
+          <Card className={classes.card} variant="outlined">
+            <CardActionArea>
+              <CardMedia
+                className={classes.media}
+                image={themeType === "dark" ? athensNight : athensDay}
+              />
+              <CardContent>
+                <Typography
+                  align="justify"
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                >
+                  Athens
+                </Typography>
+                <Typography
+                  align="justify"
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                >
+                  Athens is the capital and largest city of Greece. Athens
+                  dominates the Attica region and is one of the world&#39;s
+                  oldest cities, with its recorded history spanning over 3,400
+                  years and its earliest human presence started somewhere
+                  between the 11th and 7th millennium BC.
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button variant="outlined" size="small">
+                Share
+              </Button>
+              <Button variant="outlined" size="small">
+                Learn More
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
       </Grid>
-    </Grid>
-  </Container>
-);
+    </Container>
+  );
+};
 
 const styles = () =>
   createStyles({
