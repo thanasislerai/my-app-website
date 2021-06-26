@@ -17,6 +17,8 @@
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-eslint": "^10.1.0",
+    "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.0.0",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "6.11.0",
@@ -46,7 +48,8 @@
   "scripts": {
     "lint": "eslint --cache --cache-location node_modules/.cache/eslint --fix",
     "start": "react-scripts start",
-    "build": "react-scripts build && firebase deploy",
+    "build": "react-scripts build",
+    "deploy": "dotenv -e .env yarn build && yarn run firebase deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
