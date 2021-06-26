@@ -15,6 +15,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
 import Brightness4RoundedIcon from "@material-ui/icons/Brightness4Rounded";
+import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 
 import SideMenu from "../SideMenu";
@@ -49,6 +50,11 @@ const NavBar = ({ classes }: NavBarProps) => {
                 alignItems="center"
                 spacing={2}
               >
+                <Grid item>
+                  <IconButton component={Link} to="/">
+                    <HomeIcon />
+                  </IconButton>
+                </Grid>
                 <Grid item>
                   <Tooltip
                     arrow
