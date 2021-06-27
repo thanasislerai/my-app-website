@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 
 import ThemeContext from "../../contexts/ThemeContext";
 import UserContext from "../../contexts/UserContext";
+import userServices from "../../services/userServices";
 
 const SideMenu = ({
   isMenuOpen,
@@ -31,8 +32,18 @@ const SideMenu = ({
   classes,
 }: SideMenuProps) => {
   const { themeType, handleThemeTypeChange } = useContext(ThemeContext);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const isThemeDark = themeType === "dark";
+
+  const onUserSignOut = () => {
+    userServices
+      .signOut()
+      .then(() => {
+        setUser();
+        onMenuClose();
+      })
+      .catch(console.error);
+  };
 
   return (
     <SwipeableDrawer
@@ -57,7 +68,7 @@ const SideMenu = ({
           <ListItemText>HOME</ListItemText>
         </ListItem>
         {user?.email ? (
-          <ListItem button>
+          <ListItem button onClick={onUserSignOut}>
             <ListItemAvatar>
               <PowerSettingsNewIcon />
             </ListItemAvatar>
