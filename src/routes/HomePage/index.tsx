@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import FullScreenWrapper from "../../common/FullScreenWrapper";
-import HomePageCards from "./Cards";
 import Welcome from "./Welcome";
+import Map from "./Map";
 
 const HomePage = () => {
   const [startButtonClicked, setStartButtonClicked] = useState(false);
@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <FullScreenWrapper>
       {startButtonClicked ? (
-        <HomePageCards />
+        <Map />
       ) : (
         <Welcome onStartButtonClick={() => setStartButtonClicked(true)} />
       )}
