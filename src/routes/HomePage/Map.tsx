@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { withStyles, WithStyles, createStyles } from "@material-ui/core";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { ZoomControl } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import { mapTiles } from "../../constants/mapTiles";
@@ -17,13 +17,16 @@ const Map = ({ classes }: MapProps) => {
 
   const MapComponent = ReactMapboxGl({
     accessToken,
+    dragRotate: false,
   });
 
   return (
     <MapComponent
       className={classes.map}
       style={isThemeDark ? mapTiles.dark : mapTiles.light}
-    />
+    >
+      <ZoomControl />
+    </MapComponent>
   );
 };
 
