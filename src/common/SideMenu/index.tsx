@@ -38,7 +38,7 @@ const SideMenu = ({
   const onUserSignOut = () => {
     userServices
       .signOut()
-      .then(() => {
+      ?.then(() => {
         setUser();
         onMenuClose();
       })

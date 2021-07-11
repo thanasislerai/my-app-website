@@ -36,7 +36,7 @@ const SignIn = ({ classes }: SignInProps) => {
     setLoading(true);
     userServices
       .signIn(email, password)
-      .then((resp) => {
+      ?.then((resp) => {
         setUser({ email: resp.user?.email });
       })
       .catch(console.error)

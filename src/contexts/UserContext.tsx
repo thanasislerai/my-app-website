@@ -20,7 +20,7 @@ export const UserProvider: FC = ({ children }) => {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    app.auth().onAuthStateChanged((signedInUser) => {
+    app?.auth().onAuthStateChanged((signedInUser) => {
       // There is a signed in user
       if (signedInUser) {
         setUser({ email: signedInUser.email });

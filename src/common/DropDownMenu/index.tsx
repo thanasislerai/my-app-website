@@ -23,7 +23,7 @@ const DropDownMenu = ({ anchorEl, onClose, classes }: DropDownMenuProps) => {
   const onUserSignOut = () => {
     userServices
       .signOut()
-      .then(() => {
+      ?.then(() => {
         setUser();
         onClose();
       })

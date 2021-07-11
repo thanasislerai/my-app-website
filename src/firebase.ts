@@ -9,8 +9,10 @@ if (!apiKey) {
   );
 }
 
-const app = firebase.initializeApp({
-  apiKey,
-});
+const app = apiKey
+  ? firebase.initializeApp({
+      apiKey,
+    })
+  : undefined;
 
 export default app;
