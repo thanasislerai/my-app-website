@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   SwipeableDrawer,
   withStyles,
@@ -20,10 +19,12 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import HomeIcon from "@material-ui/icons/Home";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import ThemeContext from "../../contexts/ThemeContext";
-import UserContext from "../../contexts/UserContext";
-import userServices from "../../services/userServices";
+import { themeTypeSelector } from "../../store/selectors/theme";
+import { setTheme } from "../../store/theme/slice";
+import { signOutUser } from "../../store/user/slice";
+import { userInfoSelector } from "../../store/selectors/user";
 
 const SideMenu = ({
   isMenuOpen,
@@ -31,18 +32,14 @@ const SideMenu = ({
   onMenuClose,
   classes,
 }: SideMenuProps) => {
-  const { themeType, handleThemeTypeChange } = useContext(ThemeContext);
-  const { user, setUser } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const user = useSelector(userInfoSelector);
+  const themeType = useSelector(themeTypeSelector);
   const isThemeDark = themeType === "dark";
 
   const onUserSignOut = () => {
-    userServices
-      .signOut()
-      ?.then(() => {
-        setUser();
-        onMenuClose();
-      })
-      .catch(console.error);
+    dispatch(signOutUser());
+    onMenuClose();
   };
 
   return (
@@ -93,7 +90,7 @@ const SideMenu = ({
         <ListItem
           button
           onClick={() => {
-            handleThemeTypeChange(isThemeDark ? "light" : "dark");
+            dispatch(setTheme(isThemeDark ? "light" : "dark"));
             onMenuClose();
           }}
         >

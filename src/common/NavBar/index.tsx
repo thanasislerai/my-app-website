@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   AppBar,
   Button,
@@ -19,16 +19,19 @@ import Brightness4RoundedIcon from "@material-ui/icons/Brightness4Rounded";
 import HomeIcon from "@material-ui/icons/Home";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import SideMenu from "../SideMenu";
 import DropDownMenu from "../DropDownMenu";
-import ThemeContext from "../../contexts/ThemeContext";
-import UserContext from "../../contexts/UserContext";
+import { themeTypeSelector } from "../../store/selectors/theme";
+import { setTheme } from "../../store/theme/slice";
+import { userInfoSelector } from "../../store/selectors/user";
 
 const NavBar = ({ classes }: NavBarProps) => {
+  const dispatch = useDispatch();
   const toolbarRef = useRef(null);
-  const { themeType, handleThemeTypeChange } = useContext(ThemeContext);
-  const { user } = useContext(UserContext);
+  const themeType = useSelector(themeTypeSelector);
+  const user = useSelector(userInfoSelector);
   const isThemeDark = themeType === "dark";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropDownAnchorEl, setDropDownAnchorEl] = useState<HTMLElement | null>(
@@ -82,7 +85,7 @@ const NavBar = ({ classes }: NavBarProps) => {
                     >
                       <IconButton
                         onClick={() =>
-                          handleThemeTypeChange(isThemeDark ? "light" : "dark")
+                          dispatch(setTheme(isThemeDark ? "light" : "dark"))
                         }
                       >
                         {isThemeDark ? (

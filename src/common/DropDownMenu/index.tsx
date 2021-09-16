@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   Menu,
   MenuItem,
@@ -10,24 +9,20 @@ import {
   Theme,
   Divider,
 } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import PersonIcon from "@material-ui/icons/Person";
 import { red } from "@material-ui/core/colors";
-import userServices from "../../services/userServices";
-import UserContext from "../../contexts/UserContext";
+
+import { signOutUser } from "../../store/user/slice";
 
 const DropDownMenu = ({ anchorEl, onClose, classes }: DropDownMenuProps) => {
-  const { setUser } = useContext(UserContext);
+  const dispatch = useDispatch();
 
   const onUserSignOut = () => {
-    userServices
-      .signOut()
-      ?.then(() => {
-        setUser();
-        onClose();
-      })
-      .catch(console.error);
+    dispatch(signOutUser());
+    onClose();
   };
 
   return (

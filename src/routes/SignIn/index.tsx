@@ -1,4 +1,3 @@
-import { useContext, useState } from "react";
 import {
   Container,
   Button,
@@ -13,35 +12,28 @@ import {
 import { useForm } from "react-hook-form";
 import isEmail from "validator/lib/isEmail";
 import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import FullScreenWrapper from "../../common/FullScreenWrapper";
-import UserContext from "../../contexts/UserContext";
-import userServices from "../../services/userServices";
-
-interface SignInParams {
-  email: string;
-  password: string;
-}
+import { UserSignInParams } from "../../store/user/types";
+import {
+  userInfoSelector,
+  userLoadingSelector,
+} from "../../store/selectors/user";
+import { signInUser } from "../../store/user/slice";
 
 const SignIn = ({ classes }: SignInProps) => {
-  const { user, setUser } = useContext(UserContext);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(userInfoSelector);
+  const loading = useSelector(userLoadingSelector);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInParams>({});
+  } = useForm<UserSignInParams>({});
 
-  const onSignInFormSubmit = ({ email, password }: SignInParams) => {
-    setLoading(true);
-    userServices
-      .signIn(email, password)
-      ?.then((resp) => {
-        setUser({ email: resp.user?.email });
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  };
+  const onSignInFormSubmit = (signInParams: UserSignInParams) =>
+    dispatch(signInUser(signInParams));
 
   return (
     <FullScreenWrapper>
