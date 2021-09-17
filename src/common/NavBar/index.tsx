@@ -102,7 +102,7 @@ const NavBar = ({ classes }: NavBarProps) => {
                 <>
                   <Grid item>
                     <Typography color="textPrimary">
-                      Hi, {user.email.split("@")?.[0]}
+                      Hi, {user.userName}
                     </Typography>
                   </Grid>
                   <Grid item>
@@ -119,7 +119,9 @@ const NavBar = ({ classes }: NavBarProps) => {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button>Sign up</Button>
+                    <Button component={Link} to="/register">
+                      Sign up
+                    </Button>
                   </Grid>
                 </>
               )}

@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
 import {
-  Container,
-  Button,
-  Typography,
-  TextField,
-  Grid,
-  createStyles,
-  WithStyles,
   withStyles,
+  WithStyles,
+  createStyles,
+  Container,
+  Typography,
+  Grid,
+  TextField,
+  Button,
   CircularProgress,
   Snackbar,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import { useForm } from "react-hook-form";
-import isEmail from "validator/lib/isEmail";
-import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { Redirect } from "react-router-dom";
+import isEmail from "validator/lib/isEmail";
+import isEmpty from "validator/lib/isEmpty";
 
-import FullScreenWrapper from "../../common/FullScreenWrapper";
-import { UserSignInParams } from "../../store/user/types";
 import {
   userErrorSelector,
   userInfoSelector,
   userLoadingSelector,
 } from "../../store/selectors/user";
-import { clearError, signInUser } from "../../store/user/slice";
+import { UserSignUpParams } from "../../store/user/types";
+import { clearError, signUpUser } from "../../store/user/slice";
+import FullScreenWrapper from "../../common/FullScreenWrapper";
 
-const SignIn = ({ classes }: SignInProps) => {
+const SignUp = ({ classes }: SignUpProps) => {
   const dispatch = useDispatch();
   const user = useSelector(userInfoSelector);
   const loading = useSelector(userLoadingSelector);
@@ -36,10 +37,10 @@ const SignIn = ({ classes }: SignInProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserSignInParams>({});
+  } = useForm<UserSignUpParams>({});
 
-  const onSignInFormSubmit = (signInParams: UserSignInParams) =>
-    dispatch(signInUser(signInParams));
+  const onSignUpFormSubmit = (signUpParams: UserSignUpParams) =>
+    dispatch(signUpUser(signUpParams));
 
   const handleErrorAlertClose = () => {
     setIsErrorAlertOpen(false);
@@ -64,21 +65,34 @@ const SignIn = ({ classes }: SignInProps) => {
         </Alert>
       </Snackbar>
       {user && <Redirect to="/" />}
-      <Container className={classes.signInWrapper}>
+      <Container className={classes.signUpWrapper}>
         <Typography
           align="center"
           color="textPrimary"
           variant="h5"
           gutterBottom
         >
-          Sign In
+          Sign Up
         </Typography>
         <form
           className={classes.form}
-          onSubmit={handleSubmit(onSignInFormSubmit)}
+          onSubmit={handleSubmit(onSignUpFormSubmit)}
         >
           <Grid container justify="center">
             <Grid container spacing={3} item lg={4} md={5} sm={8} xs={11}>
+              <Grid item xs={12}>
+                <TextField
+                  {...register("userName", {
+                    required: "This is a required field",
+                    validate: (value) => !isEmpty(value) || "Invalid username",
+                  })}
+                  fullWidth
+                  label="Username"
+                  variant="outlined"
+                  error={!!errors.userName?.message}
+                  helperText={errors.userName?.message}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   {...register("email", {
@@ -129,7 +143,7 @@ const SignIn = ({ classes }: SignInProps) => {
                       color="primary"
                     />
                   ) : (
-                    "Sign in"
+                    "Sign up"
                   )}
                 </Button>
               </Grid>
@@ -143,7 +157,7 @@ const SignIn = ({ classes }: SignInProps) => {
 
 const styles = () =>
   createStyles({
-    signInWrapper: {
+    signUpWrapper: {
       height: "100%",
       display: "flex",
       flexDirection: "column",
@@ -156,6 +170,8 @@ const styles = () =>
     },
   });
 
-type SignInProps = WithStyles<typeof styles>;
+interface SignUpIncomingProps {}
 
-export default withStyles(styles)(SignIn);
+type SignUpProps = SignUpIncomingProps & WithStyles<typeof styles>;
+
+export default withStyles(styles)(SignUp);

@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 
 export interface User {
+  userName?: string;
   email?: firebase.User["email"];
   token?: string;
 }
@@ -12,6 +13,12 @@ export interface UserState {
 }
 
 export interface UserSignInParams {
+  email: string;
+  password: string;
+}
+
+export interface UserSignUpParams {
+  userName: string;
   email: string;
   password: string;
 }

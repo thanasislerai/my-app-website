@@ -9,9 +9,10 @@ import NavBar from "./common/NavBar";
 import HomePage from "./routes/HomePage";
 import NotFound from "./common/NotFound";
 import SignIn from "./routes/SignIn";
+import SignUp from "./routes/SignUp";
 import theme from "./theme";
 import { themeTypeSelector } from "./store/selectors/theme";
-import { setUser } from "./store/user/slice";
+import { getSelf } from "./store/user/slice";
 
 function App() {
   const themeType = useSelector(themeTypeSelector);
@@ -23,7 +24,7 @@ function App() {
         if (user) {
           // User is signed in
           user.getIdToken().then((token) => {
-            dispatch(setUser({ email: user.email, token }));
+            dispatch(getSelf(token));
           });
         }
       });
@@ -37,6 +38,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={SignIn} />
+          <Route exact path="/register" component={SignUp} />
           <Route component={NotFound} />
         </Switch>
       </Router>

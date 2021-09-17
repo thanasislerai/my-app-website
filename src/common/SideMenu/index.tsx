@@ -79,7 +79,12 @@ const SideMenu = ({
               </ListItemAvatar>
               <ListItemText>SIGN IN</ListItemText>
             </ListItem>
-            <ListItem button onClick={onMenuClose}>
+            <ListItem
+              button
+              onClick={onMenuClose}
+              component={Link}
+              to="/register"
+            >
               <ListItemAvatar>
                 <PersonAddIcon />
               </ListItemAvatar>
