@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders as expected 1`] = `
+exports[`App renders as expected 1`] = `
 <div>
   <header
     class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary MuiPaper-elevation4"
@@ -108,35 +108,34 @@ exports[`renders as expected 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <a
-                aria-disabled="false"
-                class="MuiButtonBase-root MuiButton-root MuiButton-text"
-                href="/login"
-                role="button"
-                tabindex="0"
+              <p
+                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
               >
-                <span
-                  class="MuiButton-label"
-                >
-                  Sign In
-                </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
-              </a>
+                Hi, 
+                testuser
+              </p>
             </div>
             <div
               class="MuiGrid-root MuiGrid-item"
             >
               <button
-                class="MuiButtonBase-root MuiButton-root MuiButton-text"
+                class="MuiButtonBase-root MuiIconButton-root"
                 tabindex="0"
                 type="button"
               >
                 <span
-                  class="MuiButton-label"
+                  class="MuiIconButton-label"
                 >
-                  Sign up
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                    />
+                  </svg>
                 </span>
                 <span
                   class="MuiTouchRipple-root"
