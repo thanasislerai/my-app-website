@@ -5,6 +5,7 @@ import { LngLat, Map as MapboxMapType, MapMouseEvent } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useSelector } from "react-redux";
 
+import Popup from "./Popup";
 import { mapTiles } from "../../../constants/mapTiles";
 import RotationControl from "./RotationControl";
 import { themeTypeSelector } from "../../../store/selectors/theme";
@@ -25,8 +26,16 @@ const Map = () => {
 
   const onAngleReset = () => setAngle(0);
 
-  const onMapClick = (_map: MapboxMapType, event: MapMouseEvent) => {
-    setPosition(event.lngLat);
+  const onMapClick = (map: MapboxMapType, event: MapMouseEvent) => {
+    const currentZoom = map.getZoom();
+    const center = event.lngLat;
+    map.flyTo({
+      center,
+      animate: true,
+      duration: 2000,
+      zoom: Math.max(currentZoom, 10),
+    });
+    setPosition(center);
   };
 
   return (
@@ -38,6 +47,7 @@ const Map = () => {
       onClick={onMapClick as unknown as MapEvent}
     >
       <ZoomControl />
+      <Popup position={position} />
       <RotationControl angle={angle} onClick={onAngleReset} />
     </MapComponent>
   );
