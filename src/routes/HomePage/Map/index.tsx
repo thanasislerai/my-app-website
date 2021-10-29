@@ -5,7 +5,7 @@ import { LngLat, Map as MapboxMapType, MapMouseEvent } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useSelector } from "react-redux";
 
-import Popup from "./Popup";
+import NewPhotoPopup from "./NewPhotoPopup";
 import { mapTiles } from "../../../constants/mapTiles";
 import RotationControl from "./RotationControl";
 import { themeTypeSelector } from "../../../store/selectors/theme";
@@ -18,7 +18,7 @@ const Map = () => {
   const themeType = useSelector(themeTypeSelector);
   const isThemeDark = themeType === "dark";
   const [angle, setAngle] = useState(0);
-  const [position, setPosition] = useState<LngLat>();
+  const [newPhotoPopupPosition, setNewPhotoPopupPosition] = useState<LngLat>();
 
   const onMapRotate = (map: MapboxMapType) => {
     setAngle(map.getBearing());
@@ -35,8 +35,10 @@ const Map = () => {
       duration: 2000,
       zoom: Math.max(currentZoom, 10),
     });
-    setPosition(center);
+    setNewPhotoPopupPosition(center);
   };
+
+  const onNewPhotoPopupClose = () => setNewPhotoPopupPosition(undefined);
 
   return (
     <MapComponent
@@ -47,7 +49,10 @@ const Map = () => {
       onClick={onMapClick as unknown as MapEvent}
     >
       <ZoomControl />
-      <Popup position={position} />
+      <NewPhotoPopup
+        position={newPhotoPopupPosition}
+        onClose={onNewPhotoPopupClose}
+      />
       <RotationControl angle={angle} onClick={onAngleReset} />
     </MapComponent>
   );

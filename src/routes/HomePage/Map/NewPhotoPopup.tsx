@@ -6,13 +6,15 @@ import {
   Card,
   CardHeader,
   PaletteType,
+  IconButton,
 } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import { LngLat } from "mapbox-gl";
 import { useSelector } from "react-redux";
 import { themeTypeSelector } from "../../../store/selectors/theme";
 
-const Popup = ({ position }: PopupProps) => {
+const NewPhotoPopup = ({ position, onClose }: NewPhotoPopupProps) => {
   const themeType = useSelector(themeTypeSelector);
   const classes = useStyles({ themeType });
   const { lat, lng } = position || {};
@@ -29,6 +31,11 @@ const Popup = ({ position }: PopupProps) => {
           subheader="Is there a good memory you would like to add here?"
           titleTypographyProps={{ variant: "h6" }}
           subheaderTypographyProps={{ variant: "subtitle2" }}
+          action={
+            <IconButton onClick={onClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          }
         />
       </Card>
     </MapboxPopup>
@@ -69,8 +76,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface PopupProps {
+interface NewPhotoPopupProps {
   position?: LngLat;
+  onClose: () => void;
 }
 
-export default Popup;
+export default NewPhotoPopup;
