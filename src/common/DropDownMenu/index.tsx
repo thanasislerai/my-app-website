@@ -3,11 +3,10 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-  withStyles,
-  WithStyles,
   createStyles,
   Theme,
   Divider,
+  makeStyles,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { fade } from "@material-ui/core/styles/colorManipulator";
@@ -17,7 +16,8 @@ import { red } from "@material-ui/core/colors";
 
 import { signOutUser } from "../../store/user/slice";
 
-const DropDownMenu = ({ anchorEl, onClose, classes }: DropDownMenuProps) => {
+const DropDownMenu = ({ anchorEl, onClose }: DropDownMenuProps) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const onUserSignOut = () => {
@@ -57,7 +57,7 @@ const DropDownMenu = ({ anchorEl, onClose, classes }: DropDownMenuProps) => {
   );
 };
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     menuItem: {
       paddingTop: theme.spacing(0.5),
@@ -87,13 +87,12 @@ const styles = (theme: Theme) =>
     divider: {
       backgroundColor: fade(theme.palette.primary.main, 0.5),
     },
-  });
+  })
+);
 
-interface DropDownMenuIncomingProps {
+interface DropDownMenuProps {
   anchorEl: HTMLElement | null;
   onClose: () => void;
 }
 
-type DropDownMenuProps = DropDownMenuIncomingProps & WithStyles<typeof styles>;
-
-export default withStyles(styles)(DropDownMenu);
+export default DropDownMenu;

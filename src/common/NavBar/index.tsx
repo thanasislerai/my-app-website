@@ -9,9 +9,8 @@ import {
   useTheme,
   useMediaQuery,
   createStyles,
-  WithStyles,
-  withStyles,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
@@ -27,8 +26,9 @@ import { themeTypeSelector } from "../../store/selectors/theme";
 import { setTheme } from "../../store/theme/slice";
 import { userInfoSelector } from "../../store/selectors/user";
 
-const NavBar = ({ classes }: NavBarProps) => {
+const NavBar = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const toolbarRef = useRef(null);
   const themeType = useSelector(themeTypeSelector);
   const user = useSelector(userInfoSelector);
@@ -133,13 +133,12 @@ const NavBar = ({ classes }: NavBarProps) => {
   );
 };
 
-const styles = () =>
+const useStyles = makeStyles(() =>
   createStyles({
     buttonGroup: {
       width: "auto",
     },
-  });
+  })
+);
 
-type NavBarProps = WithStyles<typeof styles>;
-
-export default withStyles(styles)(NavBar);
+export default NavBar;

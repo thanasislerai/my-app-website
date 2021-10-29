@@ -1,7 +1,6 @@
 import {
   SwipeableDrawer,
-  withStyles,
-  WithStyles,
+  makeStyles,
   createStyles,
   Theme,
   IconButton,
@@ -26,13 +25,9 @@ import { setTheme } from "../../store/theme/slice";
 import { signOutUser } from "../../store/user/slice";
 import { userInfoSelector } from "../../store/selectors/user";
 
-const SideMenu = ({
-  isMenuOpen,
-  onMenuOpen,
-  onMenuClose,
-  classes,
-}: SideMenuProps) => {
+const SideMenu = ({ isMenuOpen, onMenuOpen, onMenuClose }: SideMenuProps) => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const user = useSelector(userInfoSelector);
   const themeType = useSelector(themeTypeSelector);
   const isThemeDark = themeType === "dark";
@@ -115,21 +110,20 @@ const SideMenu = ({
   );
 };
 
-const styles = (theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       minWidth: 240,
       padding: theme.spacing(2),
       backgroundColor: theme.palette.primary.main,
     },
-  });
+  })
+);
 
-interface SideMenuIncomingProps {
+interface SideMenuProps {
   isMenuOpen: boolean;
   onMenuOpen: () => void;
   onMenuClose: () => void;
 }
 
-type SideMenuProps = SideMenuIncomingProps & WithStyles<typeof styles>;
-
-export default withStyles(styles)(SideMenu);
+export default SideMenu;

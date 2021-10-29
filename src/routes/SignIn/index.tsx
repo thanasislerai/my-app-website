@@ -6,8 +6,7 @@ import {
   TextField,
   Grid,
   createStyles,
-  WithStyles,
-  withStyles,
+  makeStyles,
   CircularProgress,
   Snackbar,
 } from "@material-ui/core";
@@ -26,8 +25,9 @@ import {
 } from "../../store/selectors/user";
 import { clearError, signInUser } from "../../store/user/slice";
 
-const SignIn = ({ classes }: SignInProps) => {
+const SignIn = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const user = useSelector(userInfoSelector);
   const loading = useSelector(userLoadingSelector);
   const error = useSelector(userErrorSelector);
@@ -141,7 +141,7 @@ const SignIn = ({ classes }: SignInProps) => {
   );
 };
 
-const styles = () =>
+const useStyles = makeStyles(() =>
   createStyles({
     signInWrapper: {
       height: "100%",
@@ -154,8 +154,7 @@ const styles = () =>
     form: {
       width: "100%",
     },
-  });
+  })
+);
 
-type SignInProps = WithStyles<typeof styles>;
-
-export default withStyles(styles)(SignIn);
+export default SignIn;

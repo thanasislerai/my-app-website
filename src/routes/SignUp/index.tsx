@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  withStyles,
-  WithStyles,
+  makeStyles,
   createStyles,
   Container,
   Typography,
@@ -27,8 +26,9 @@ import { UserSignUpParams } from "../../store/user/types";
 import { clearError, signUpUser } from "../../store/user/slice";
 import FullScreenWrapper from "../../common/FullScreenWrapper";
 
-const SignUp = ({ classes }: SignUpProps) => {
+const SignUp = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const user = useSelector(userInfoSelector);
   const loading = useSelector(userLoadingSelector);
   const error = useSelector(userErrorSelector);
@@ -155,7 +155,7 @@ const SignUp = ({ classes }: SignUpProps) => {
   );
 };
 
-const styles = () =>
+const useStyles = makeStyles(() =>
   createStyles({
     signUpWrapper: {
       height: "100%",
@@ -168,10 +168,7 @@ const styles = () =>
     form: {
       width: "100%",
     },
-  });
+  })
+);
 
-interface SignUpIncomingProps {}
-
-type SignUpProps = SignUpIncomingProps & WithStyles<typeof styles>;
-
-export default withStyles(styles)(SignUp);
+export default SignUp;

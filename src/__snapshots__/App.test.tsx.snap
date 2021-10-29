@@ -46,7 +46,7 @@ exports[`App renders as expected 1`] = `
           class="MuiGrid-root MuiGrid-item"
         >
           <div
-            class="MuiGrid-root NavBar-buttonGroup-1 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center"
+            class="MuiGrid-root makeStyles-buttonGroup-1 MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-align-items-xs-center"
           >
             <div
               class="MuiGrid-root MuiGrid-item"
