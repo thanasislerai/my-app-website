@@ -26,7 +26,7 @@ const Map = () => {
 
   const onAngleReset = () => setAngle(0);
 
-  const onMapClick = (map: MapboxMapType, event: MapMouseEvent) => {
+  const onMapRightClick = (map: MapboxMapType, event: MapMouseEvent) => {
     const currentZoom = map.getZoom();
     const center = event.lngLat;
     map.flyTo({
@@ -46,7 +46,7 @@ const Map = () => {
       style={isThemeDark ? mapTiles.dark : mapTiles.light}
       bearing={[angle]}
       containerStyle={{ height: "100%", width: "100%" }}
-      onClick={onMapClick as unknown as MapEvent}
+      onContextMenu={onMapRightClick as unknown as MapEvent}
     >
       <ZoomControl />
       <NewPhotoPopup
