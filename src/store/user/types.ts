@@ -22,4 +22,5 @@ export interface UserSignUpParams {
   userName: string;
   email: string;
   password: string;
+  imageUrl?: string;
 }

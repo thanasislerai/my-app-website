@@ -4,6 +4,7 @@ import userServices from "../../services/userServices";
 import type { CreateAsyncThunkTypes } from "../configure";
 
 import { UserSignInParams, UserSignUpParams, UserState } from "./types";
+import { constructUserObject } from "./utils";
 
 const userInitialState: UserState = {
   loading: false,
@@ -19,11 +20,7 @@ export const signInUser = createAsyncThunk<
     const token = await user?.getIdToken();
     const { data: storedUser } = await userServices.getSelf(token);
 
-    return {
-      userName: storedUser.userName,
-      email: storedUser.email,
-      token,
-    };
+    return constructUserObject(storedUser, token);
   } catch (err: any) {
     const error: AxiosError<UserState["error"]> = err;
     return rejectWithValue(error.message);
@@ -34,23 +31,26 @@ export const signUpUser = createAsyncThunk<
   UserState["userInfo"],
   UserSignUpParams,
   CreateAsyncThunkTypes
->("user/signUp", async ({ email, password, userName }, { rejectWithValue }) => {
-  try {
-    const { user: firebaseUser } =
-      (await userServices.signUp(email, password)) || {};
-    const token = await firebaseUser?.getIdToken();
-    const { data: storedUser } = await userServices.storeUser(userName, email);
+>(
+  "user/signUp",
+  async ({ email, password, userName, imageUrl }, { rejectWithValue }) => {
+    try {
+      const { user: firebaseUser } =
+        (await userServices.signUp(email, password)) || {};
+      const token = await firebaseUser?.getIdToken();
+      const { data: storedUser } = await userServices.storeUser(
+        userName,
+        email,
+        imageUrl
+      );
 
-    return {
-      userName: storedUser.userName,
-      email: storedUser.email,
-      token,
-    };
-  } catch (err: any) {
-    const error: AxiosError<UserState["error"]> = err;
-    return rejectWithValue(error.message);
+      return constructUserObject(storedUser, token);
+    } catch (err: any) {
+      const error: AxiosError<UserState["error"]> = err;
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const getSelf = createAsyncThunk<
   UserState["userInfo"],
@@ -62,11 +62,7 @@ export const getSelf = createAsyncThunk<
     try {
       const { data: userData } = await userServices.getSelf(token);
 
-      return {
-        email: userData.email,
-        userName: userData.userName,
-        token,
-      };
+      return constructUserObject(userData, token);
     } catch (err: any) {
       const error: AxiosError<UserState["error"]> = err;
       return rejectWithValue(error.message);

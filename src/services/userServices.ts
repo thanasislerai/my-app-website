@@ -10,13 +10,14 @@ const signUp = (email: string, password: string) =>
 
 const signOut = () => app?.auth().signOut();
 
-const storeUser = (userName: string, email: string) =>
+const storeUser = (userName: string, email: string, imageUrl?: string) =>
   requests.send<User>({
     method: "POST",
     url: "user",
     data: {
       userName,
       email,
+      imageUrl,
     },
   });
 
