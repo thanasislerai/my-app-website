@@ -99,7 +99,7 @@ const NavBar = () => {
                   </Grid>
                 </>
               )}
-              {user?.email ? (
+              {user ? (
                 <>
                   <Grid item>
                     <Grid container alignItems="center" spacing={1}>

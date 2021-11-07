@@ -1,11 +1,13 @@
-import { pick, merge } from "lodash";
-
-import { User, UserState } from "./types";
+import { UserResponse, UserState } from "./types";
 
 export const constructUserObject = (
-  userData: User,
+  userData: UserResponse,
   token?: string
-): UserState["userInfo"] =>
-  merge(pick(userData, ["userName", "email", " imageUrl"]), {
-    token,
-  });
+): UserState["userInfo"] => ({
+  // eslint-disable-next-line no-underscore-dangle
+  id: userData._id,
+  email: userData.email,
+  userName: userData.userName,
+  imageUrl: userData.imageUrl,
+  token,
+});
