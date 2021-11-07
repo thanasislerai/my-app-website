@@ -12,13 +12,14 @@ import SignIn from "./routes/SignIn";
 import SignUp from "./routes/SignUp";
 import theme from "./theme";
 import { themeTypeSelector } from "./store/selectors/theme";
-import { getSelf } from "./store/user/slice";
+import { getSelf, setFirebaseUserLoading } from "./store/user/slice";
 
 function App() {
   const themeType = useSelector(themeTypeSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setFirebaseUserLoading(true));
     if (app) {
       app.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -27,6 +28,7 @@ function App() {
             dispatch(getSelf(token));
           });
         }
+        dispatch(setFirebaseUserLoading(false));
       });
     }
   }, [dispatch]);

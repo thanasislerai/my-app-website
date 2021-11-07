@@ -9,3 +9,7 @@ export const userLoadingSelector = (state: RootState): UserState["loading"] =>
 
 export const userErrorSelector = (state: RootState): UserState["error"] =>
   state.user.error;
+
+export const firebaseUserLoadingSelector = (
+  state: RootState
+): UserState["firebaseUserLoading"] => state.user.firebaseUserLoading;

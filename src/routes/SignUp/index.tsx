@@ -18,6 +18,7 @@ import isEmail from "validator/lib/isEmail";
 import isEmpty from "validator/lib/isEmpty";
 
 import {
+  firebaseUserLoadingSelector,
   userErrorSelector,
   userInfoSelector,
   userLoadingSelector,
@@ -32,6 +33,7 @@ const SignUp = () => {
   const user = useSelector(userInfoSelector);
   const loading = useSelector(userLoadingSelector);
   const error = useSelector(userErrorSelector);
+  const firebaseUserLoading = useSelector(firebaseUserLoadingSelector);
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
   const {
     register,
@@ -64,7 +66,7 @@ const SignUp = () => {
           {error}
         </Alert>
       </Snackbar>
-      {user && <Redirect to="/" />}
+      {(user || firebaseUserLoading) && <Redirect to="/" />}
       <Container className={classes.signUpWrapper}>
         <Typography
           align="center"
@@ -78,7 +80,7 @@ const SignUp = () => {
           className={classes.form}
           onSubmit={handleSubmit(onSignUpFormSubmit)}
         >
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid container spacing={3} item lg={4} md={5} sm={8} xs={11}>
               <Grid item xs={12}>
                 <TextField

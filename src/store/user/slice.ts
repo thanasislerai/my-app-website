@@ -97,6 +97,10 @@ const userSlice = createSlice({
   name: "user",
   initialState: userInitialState,
   reducers: {
+    setFirebaseUserLoading: (
+      state,
+      action: PayloadAction<UserState["firebaseUserLoading"]>
+    ) => ({ ...state, firebaseUserLoading: action.payload }),
     setUser: (state, action: PayloadAction<UserState["userInfo"]>) => ({
       ...state,
       userInfo: action.payload,
@@ -214,6 +218,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, clearError } = userSlice.actions;
+export const { setFirebaseUserLoading, setUser, clearError } =
+  userSlice.actions;
 
 export default userSlice.reducer;

@@ -12,6 +12,7 @@ export interface UserState {
   userInfo?: User;
   loading: boolean;
   error?: string | null;
+  firebaseUserLoading?: boolean;
 }
 
 export interface UserSignInParams {

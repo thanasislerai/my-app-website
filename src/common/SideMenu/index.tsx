@@ -45,7 +45,7 @@ const SideMenu = ({ isMenuOpen, onMenuOpen, onMenuClose }: SideMenuProps) => {
       onClose={onMenuClose}
       classes={{ paper: classes.root }}
     >
-      <Grid container justify="flex-end">
+      <Grid container justifyContent="flex-end">
         <Grid item>
           <IconButton onClick={onMenuClose}>
             <CloseIcon />

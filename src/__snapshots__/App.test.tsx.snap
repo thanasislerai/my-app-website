@@ -9,11 +9,11 @@ exports[`App renders as expected 1`] = `
       class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
     >
       <div
-        class="PrivateSwipeArea-root-12 PrivateSwipeArea-anchorLeft-13"
+        class="PrivateSwipeArea-root-14 PrivateSwipeArea-anchorLeft-15"
         style="width: 20px;"
       />
       <div
-        class="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+        class="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-content-xs-space-between"
       >
         <div
           class="MuiGrid-root MuiGrid-item"
@@ -115,7 +115,7 @@ exports[`App renders as expected 1`] = `
                   class="MuiGrid-root MuiGrid-item"
                 >
                   <div
-                    class="MuiAvatar-root MuiAvatar-circle makeStyles-profileAvatar-2 MuiAvatar-colorDefault"
+                    class="MuiAvatar-root MuiAvatar-circular makeStyles-profileAvatar-10 MuiAvatar-colorDefault"
                   >
                     <svg
                       aria-hidden="true"
@@ -173,10 +173,10 @@ exports[`App renders as expected 1`] = `
     </div>
   </header>
   <div
-    class="MuiBox-root MuiBox-root-10"
+    class="MuiBox-root MuiBox-root-12"
   >
     <div
-      class="MuiBox-root MuiBox-root-11"
+      class="MuiBox-root MuiBox-root-13"
     >
       <h2
         class="MuiTypography-root MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-gutterBottom MuiTypography-alignCenter"

@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FullScreenWrapper from "../../common/FullScreenWrapper";
 import { UserSignInParams } from "../../store/user/types";
 import {
+  firebaseUserLoadingSelector,
   userErrorSelector,
   userInfoSelector,
   userLoadingSelector,
@@ -31,6 +32,7 @@ const SignIn = () => {
   const user = useSelector(userInfoSelector);
   const loading = useSelector(userLoadingSelector);
   const error = useSelector(userErrorSelector);
+  const firebaseUserLoading = useSelector(firebaseUserLoadingSelector);
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
   const {
     register,
@@ -63,7 +65,7 @@ const SignIn = () => {
           {error}
         </Alert>
       </Snackbar>
-      {user && <Redirect to="/" />}
+      {(user || firebaseUserLoading) && <Redirect to="/" />}
       <Container className={classes.signInWrapper}>
         <Typography
           align="center"
@@ -77,7 +79,7 @@ const SignIn = () => {
           className={classes.form}
           onSubmit={handleSubmit(onSignInFormSubmit)}
         >
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid container spacing={3} item lg={4} md={5} sm={8} xs={11}>
               <Grid item xs={12}>
                 <TextField

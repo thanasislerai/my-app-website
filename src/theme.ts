@@ -1,11 +1,11 @@
 import {
-  createMuiTheme,
+  createTheme,
   PaletteType,
   responsiveFontSizes,
 } from "@material-ui/core";
 import blue from "@material-ui/core/colors/blue";
 import green from "@material-ui/core/colors/green";
-import { fade } from "@material-ui/core/styles/colorManipulator";
+import { alpha } from "@material-ui/core/styles/colorManipulator";
 
 const colors: Record<string, string> = {
   backgroundDark: "#0d1117",
@@ -15,7 +15,7 @@ const colors: Record<string, string> = {
 
 const theme = (type?: PaletteType) => {
   return responsiveFontSizes(
-    createMuiTheme({
+    createTheme({
       palette: {
         type,
         primary: {
@@ -40,11 +40,11 @@ const theme = (type?: PaletteType) => {
 
           outlinedSecondary: {
             color: colors.buttonSecondary,
-            border: `1px solid ${fade(colors.buttonSecondary, 0.5)}`,
+            border: `1px solid ${alpha(colors.buttonSecondary, 0.5)}`,
 
             "&:hover": {
               border: `1px solid ${colors.buttonSecondary}`,
-              backgroundColor: fade(colors.buttonSecondary, 0.08),
+              backgroundColor: alpha(colors.buttonSecondary, 0.08),
             },
           },
         },

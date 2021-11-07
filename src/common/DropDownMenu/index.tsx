@@ -9,7 +9,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { fade } from "@material-ui/core/styles/colorManipulator";
+import { alpha } from "@material-ui/core/styles/colorManipulator";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import PersonIcon from "@material-ui/icons/Person";
 import { red } from "@material-ui/core/colors";
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     divider: {
-      backgroundColor: fade(theme.palette.primary.main, 0.5),
+      backgroundColor: alpha(theme.palette.primary.main, 0.5),
     },
   })
 );
