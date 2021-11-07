@@ -4,6 +4,7 @@ export interface User {
   userName?: string;
   email?: firebase.User["email"];
   token?: string;
+  imageUrl?: string;
 }
 
 export interface UserState {

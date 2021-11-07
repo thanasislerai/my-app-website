@@ -9,7 +9,7 @@ exports[`App renders as expected 1`] = `
       class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
     >
       <div
-        class="PrivateSwipeArea-root-11 PrivateSwipeArea-anchorLeft-12"
+        class="PrivateSwipeArea-root-12 PrivateSwipeArea-anchorLeft-13"
         style="width: 20px;"
       />
       <div
@@ -108,12 +108,37 @@ exports[`App renders as expected 1`] = `
             <div
               class="MuiGrid-root MuiGrid-item"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+              <div
+                class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center"
               >
-                Hi, 
-                testuser
-              </p>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <div
+                    class="MuiAvatar-root MuiAvatar-circle makeStyles-profileAvatar-2 MuiAvatar-colorDefault"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root MuiAvatar-fallback"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="MuiGrid-root MuiGrid-item"
+                >
+                  <p
+                    class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
+                  >
+                    testuser
+                  </p>
+                </div>
+              </div>
             </div>
             <div
               class="MuiGrid-root MuiGrid-item"
@@ -148,10 +173,10 @@ exports[`App renders as expected 1`] = `
     </div>
   </header>
   <div
-    class="MuiBox-root MuiBox-root-9"
+    class="MuiBox-root MuiBox-root-10"
   >
     <div
-      class="MuiBox-root MuiBox-root-10"
+      class="MuiBox-root MuiBox-root-11"
     >
       <h2
         class="MuiTypography-root MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-gutterBottom MuiTypography-alignCenter"

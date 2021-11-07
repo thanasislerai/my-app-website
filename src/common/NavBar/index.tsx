@@ -11,6 +11,7 @@ import {
   createStyles,
   Typography,
   makeStyles,
+  Avatar,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7RoundedIcon from "@material-ui/icons/Brightness7Rounded";
@@ -101,9 +102,19 @@ const NavBar = () => {
               {user?.email ? (
                 <>
                   <Grid item>
-                    <Typography color="textPrimary">
-                      Hi, {user.userName}
-                    </Typography>
+                    <Grid container alignItems="center" spacing={1}>
+                      <Grid item>
+                        <Avatar
+                          src={user.imageUrl}
+                          className={classes.profileAvatar}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Typography color="textPrimary">
+                          {user.userName}
+                        </Typography>
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item>
                     <IconButton onClick={onDropDownMenuOpen}>
@@ -137,6 +148,10 @@ const useStyles = makeStyles(() =>
   createStyles({
     buttonGroup: {
       width: "auto",
+    },
+    profileAvatar: {
+      height: 32,
+      width: 32,
     },
   })
 );
