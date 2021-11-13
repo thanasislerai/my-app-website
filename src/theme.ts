@@ -1,11 +1,10 @@
 import {
   createTheme,
-  PaletteType,
+  PaletteMode,
   responsiveFontSizes,
-} from "@material-ui/core";
-import blue from "@material-ui/core/colors/blue";
-import green from "@material-ui/core/colors/green";
-import { alpha } from "@material-ui/core/styles/colorManipulator";
+  alpha,
+} from "@mui/material";
+import { blue, green } from "@mui/material/colors";
 
 const colors: Record<string, string> = {
   backgroundDark: "#0d1117",
@@ -13,38 +12,40 @@ const colors: Record<string, string> = {
   buttonSecondaryHover: green[800],
 };
 
-const theme = (type?: PaletteType) => {
+const theme = (mode?: PaletteMode) => {
   return responsiveFontSizes(
     createTheme({
       palette: {
-        type,
+        mode,
         primary: {
-          main: type === "dark" ? blue[900] : blue[600],
+          main: mode === "dark" ? blue[900] : blue[600],
         },
         background: {
-          default: type === "dark" ? colors.backgroundDark : undefined,
+          default: mode === "dark" ? colors.backgroundDark : undefined,
         },
       },
 
-      overrides: {
+      components: {
         MuiButton: {
-          containedSecondary: {
-            backgroundColor: colors.buttonSecondary,
-            "&:hover": {
-              backgroundColor: colors.buttonSecondaryHover,
-              "@media (hover: none)": {
-                backgroundColor: colors.buttonSecondary,
+          styleOverrides: {
+            containedSecondary: {
+              backgroundColor: colors.buttonSecondary,
+              "&:hover": {
+                backgroundColor: colors.buttonSecondaryHover,
+                "@media (hover: none)": {
+                  backgroundColor: colors.buttonSecondary,
+                },
               },
             },
-          },
 
-          outlinedSecondary: {
-            color: colors.buttonSecondary,
-            border: `1px solid ${alpha(colors.buttonSecondary, 0.5)}`,
+            outlinedSecondary: {
+              color: colors.buttonSecondary,
+              border: `1px solid ${alpha(colors.buttonSecondary, 0.5)}`,
 
-            "&:hover": {
-              border: `1px solid ${colors.buttonSecondary}`,
-              backgroundColor: alpha(colors.buttonSecondary, 0.08),
+              "&:hover": {
+                border: `1px solid ${colors.buttonSecondary}`,
+                backgroundColor: alpha(colors.buttonSecondary, 0.08),
+              },
             },
           },
         },

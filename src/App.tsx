@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { ThemeProvider } from "@material-ui/core";
+import { ThemeProvider } from "@mui/material";
 
 import app from "./firebase";
 import NavBar from "./common/NavBar";

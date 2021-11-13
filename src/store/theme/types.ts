@@ -1,5 +1,5 @@
-import { PaletteType } from "@material-ui/core";
+import { PaletteMode } from "@mui/material";
 
 export interface ThemeState {
-  type: PaletteType;
+  mode: PaletteMode;
 }
