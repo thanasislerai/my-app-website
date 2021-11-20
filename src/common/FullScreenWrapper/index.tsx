@@ -1,13 +1,10 @@
-import { Box, useTheme } from "@material-ui/core";
 import { PropsWithChildren } from "react";
+import { Box } from "@mui/material";
 
-const FullScreenWrapper = ({ children }: PropsWithChildren<{}>) => {
-  const theme = useTheme();
-  return (
-    <Box flexGrow={1} bgcolor={theme.palette.background.default}>
-      {children}
-    </Box>
-  );
-};
+const FullScreenWrapper = ({ children }: PropsWithChildren<{}>) => (
+  <Box flexGrow={1} bgcolor="background.default">
+    {children}
+  </Box>
+);
 
 export default FullScreenWrapper;

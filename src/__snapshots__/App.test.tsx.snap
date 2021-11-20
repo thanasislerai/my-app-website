@@ -9,7 +9,7 @@ exports[`App renders as expected 1`] = `
       class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
     >
       <div
-        class="PrivateSwipeArea-root-14 PrivateSwipeArea-anchorLeft-15"
+        class="PrivateSwipeArea-root-13 PrivateSwipeArea-anchorLeft-14"
         style="width: 20px;"
       />
       <div
@@ -173,10 +173,10 @@ exports[`App renders as expected 1`] = `
     </div>
   </header>
   <div
-    class="MuiBox-root MuiBox-root-12"
+    class="MuiBox-root css-1hz878p"
   >
     <div
-      class="MuiBox-root MuiBox-root-13"
+      class="MuiBox-root MuiBox-root-12"
     >
       <h2
         class="MuiTypography-root MuiTypography-h2 MuiTypography-colorTextPrimary MuiTypography-gutterBottom MuiTypography-alignCenter"
