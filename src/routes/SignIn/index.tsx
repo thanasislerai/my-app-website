@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   Container,
   Button,
-  Typography,
   TextField,
   Grid,
   createStyles,
@@ -67,14 +66,6 @@ const SignIn = () => {
       </Snackbar>
       {(user || firebaseUserLoading) && <Redirect to="/" />}
       <Container className={classes.signInWrapper}>
-        <Typography
-          align="center"
-          color="textPrimary"
-          variant="h5"
-          gutterBottom
-        >
-          Sign In
-        </Typography>
         <form
           className={classes.form}
           onSubmit={handleSubmit(onSignInFormSubmit)}

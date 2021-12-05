@@ -3,19 +3,26 @@ import {
   makeStyles,
   createStyles,
   Container,
-  Typography,
   Grid,
   TextField,
   Button,
   CircularProgress,
   Snackbar,
+  Avatar,
+  Theme,
+  useTheme,
+  useMediaQuery,
+  TextFieldProps,
+  IconButton,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Redirect } from "react-router-dom";
 import isEmail from "validator/lib/isEmail";
 import isEmpty from "validator/lib/isEmpty";
+import { ImageListType } from "react-images-uploading";
 
 import {
   firebaseUserLoadingSelector,
@@ -26,8 +33,14 @@ import {
 import { UserSignUpParams } from "../../store/user/types";
 import { clearError, signUpUser } from "../../store/user/slice";
 import FullScreenWrapper from "../../common/FullScreenWrapper";
+import ImageUpload from "../../common/ImageUpload";
+
+const PROFILE_AVATAR_SIZE = 96;
+const MOBILE_TO_DESKTOP_RATIO = 2 / 3;
 
 const SignUp = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = useSelector(userInfoSelector);
@@ -35,6 +48,8 @@ const SignUp = () => {
   const error = useSelector(userErrorSelector);
   const firebaseUserLoading = useSelector(firebaseUserLoadingSelector);
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
+  const [profilePic, setProfilePic] = useState<ImageListType>([]);
+  const textFieldSize: TextFieldProps["size"] = isMobile ? "small" : "medium";
   const {
     register,
     handleSubmit,
@@ -48,6 +63,8 @@ const SignUp = () => {
     setIsErrorAlertOpen(false);
     dispatch(clearError());
   };
+
+  const onProfilePicDelete = () => setProfilePic([]);
 
   useEffect(() => {
     if (error) {
@@ -68,14 +85,21 @@ const SignUp = () => {
       </Snackbar>
       {(user || firebaseUserLoading) && <Redirect to="/" />}
       <Container className={classes.signUpWrapper}>
-        <Typography
-          align="center"
-          color="textPrimary"
-          variant="h5"
-          gutterBottom
-        >
-          Sign Up
-        </Typography>
+        <div className={classes.profileAvatarWrapper}>
+          <Avatar
+            className={classes.profileAvatar}
+            src={profilePic?.[0]?.dataURL}
+          />
+          {profilePic.length > 0 && (
+            <IconButton
+              color="secondary"
+              className={classes.profileAvatarDeleteButton}
+              onClick={onProfilePicDelete}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
+        </div>
         <form
           className={classes.form}
           onSubmit={handleSubmit(onSignUpFormSubmit)}
@@ -89,6 +113,7 @@ const SignUp = () => {
                     validate: (value) => !isEmpty(value) || "Invalid username",
                   })}
                   fullWidth
+                  size={textFieldSize}
                   label="Username"
                   variant="outlined"
                   error={!!errors.userName?.message}
@@ -102,6 +127,7 @@ const SignUp = () => {
                     validate: (value) => isEmail(value) || "Invalid email",
                   })}
                   fullWidth
+                  size={textFieldSize}
                   label="Email"
                   variant="outlined"
                   error={!!errors.email?.message}
@@ -123,11 +149,19 @@ const SignUp = () => {
                     },
                   })}
                   fullWidth
+                  size={textFieldSize}
                   label="Password"
                   type="password"
                   variant="outlined"
                   error={!!errors.password?.message}
                   helperText={errors.password?.message}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ImageUpload
+                  className={classes.imageUpload}
+                  images={profilePic}
+                  onImagesChange={setProfilePic}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -157,7 +191,7 @@ const SignUp = () => {
   );
 };
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     signUpWrapper: {
       height: "100%",
@@ -169,6 +203,32 @@ const useStyles = makeStyles(() =>
 
     form: {
       width: "100%",
+    },
+    profileAvatarWrapper: {
+      position: "relative",
+      marginBottom: theme.spacing(3),
+    },
+    profileAvatar: {
+      height: PROFILE_AVATAR_SIZE,
+      width: PROFILE_AVATAR_SIZE,
+      [theme.breakpoints.down("xs")]: {
+        height: MOBILE_TO_DESKTOP_RATIO * PROFILE_AVATAR_SIZE,
+        width: MOBILE_TO_DESKTOP_RATIO * PROFILE_AVATAR_SIZE,
+      },
+    },
+    profileAvatarDeleteButton: {
+      position: "absolute",
+      top: 65,
+      left: 55,
+      [theme.breakpoints.down("xs")]: {
+        top: 35,
+        left: 30,
+      },
+    },
+    imageUpload: {
+      [theme.breakpoints.down("xs")]: {
+        padding: theme.spacing(4, 2),
+      },
     },
   })
 );
