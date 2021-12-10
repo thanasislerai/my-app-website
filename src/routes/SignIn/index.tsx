@@ -8,6 +8,7 @@ import {
   makeStyles,
   CircularProgress,
   Snackbar,
+  Theme,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { useForm } from "react-hook-form";
@@ -134,7 +135,7 @@ const SignIn = () => {
   );
 };
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     signInWrapper: {
       height: "100%",
@@ -142,6 +143,9 @@ const useStyles = makeStyles(() =>
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      overflow: "hidden",
+      paddingTop: theme.spacing(8),
+      paddingBottom: theme.spacing(8),
     },
 
     form: {

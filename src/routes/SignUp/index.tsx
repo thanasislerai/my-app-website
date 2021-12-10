@@ -15,6 +15,7 @@ import {
   TextFieldProps,
   IconButton,
 } from "@material-ui/core";
+import red from "@material-ui/core/colors/red";
 import Alert from "@material-ui/lab/Alert";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,8 +36,8 @@ import { clearError, signUpUser } from "../../store/user/slice";
 import FullScreenWrapper from "../../common/FullScreenWrapper";
 import ImageUpload from "../../common/ImageUpload";
 
-const PROFILE_AVATAR_SIZE = 96;
-const MOBILE_TO_DESKTOP_RATIO = 2 / 3;
+const PROFILE_AVATAR_SIZE = 120;
+const MOBILE_TO_DESKTOP_RATIO = 5 / 6;
 
 const SignUp = () => {
   const theme = useTheme();
@@ -92,7 +93,6 @@ const SignUp = () => {
           />
           {profilePic.length > 0 && (
             <IconButton
-              color="secondary"
               className={classes.profileAvatarDeleteButton}
               onClick={onProfilePicDelete}
             >
@@ -199,6 +199,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      overflow: "hidden",
+      paddingTop: theme.spacing(8),
+      paddingBottom: theme.spacing(8),
     },
 
     form: {
@@ -217,12 +220,16 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     profileAvatarDeleteButton: {
+      backgroundColor: red[700],
       position: "absolute",
-      top: 65,
-      left: 55,
+      top: 80,
+      left: 75,
+      "&:hover": {
+        backgroundColor: red[900],
+      },
       [theme.breakpoints.down("xs")]: {
-        top: 35,
-        left: 30,
+        top: 65,
+        left: 60,
       },
     },
     imageUpload: {
