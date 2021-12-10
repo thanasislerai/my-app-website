@@ -36,8 +36,8 @@ import { clearError, signUpUser } from "../../store/user/slice";
 import FullScreenWrapper from "../../common/FullScreenWrapper";
 import ImageUpload from "../../common/ImageUpload";
 
-const PROFILE_AVATAR_SIZE = 120;
-const MOBILE_TO_DESKTOP_RATIO = 5 / 6;
+const PROFILE_AVATAR_SIZE = 200;
+const PROFILE_AVATAR_MOBILE_SIZE = 120;
 
 const SignUp = () => {
   const theme = useTheme();
@@ -200,8 +200,8 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
       overflow: "hidden",
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
+      paddingTop: theme.spacing(6),
+      paddingBottom: theme.spacing(6),
     },
 
     form: {
@@ -215,21 +215,21 @@ const useStyles = makeStyles((theme: Theme) =>
       height: PROFILE_AVATAR_SIZE,
       width: PROFILE_AVATAR_SIZE,
       [theme.breakpoints.down("xs")]: {
-        height: MOBILE_TO_DESKTOP_RATIO * PROFILE_AVATAR_SIZE,
-        width: MOBILE_TO_DESKTOP_RATIO * PROFILE_AVATAR_SIZE,
+        height: PROFILE_AVATAR_MOBILE_SIZE,
+        width: PROFILE_AVATAR_MOBILE_SIZE,
       },
     },
     profileAvatarDeleteButton: {
       backgroundColor: red[700],
       position: "absolute",
-      top: 80,
-      left: 75,
+      top: 160,
+      left: 140,
       "&:hover": {
         backgroundColor: red[900],
       },
       [theme.breakpoints.down("xs")]: {
-        top: 65,
-        left: 60,
+        top: 85,
+        left: 75,
       },
     },
     imageUpload: {
