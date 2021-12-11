@@ -200,8 +200,8 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
       overflow: "hidden",
-      paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6),
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
     },
 
     form: {

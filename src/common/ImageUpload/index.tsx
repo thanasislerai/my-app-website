@@ -33,9 +33,14 @@ const ImageUpload = ({
             className={classNames(className, classes.fileDrop)}
             color="primary"
             variant="outlined"
+            classes={{ label: classes.fileDropLabel }}
             {...dragProps}
           >
-            Upload profile picture
+            <Typography variant="subtitle1">Upload profile picture</Typography>
+            <Typography variant="subtitle2">
+              Only {ACCEPT_TYPE.map((type) => `.${type}`).join(", ")} files up
+              to {MAX_FILE_SIZE_MB}MB are accepted.
+            </Typography>
           </Button>
           {errors?.maxFileSize && (
             <Typography
@@ -75,6 +80,10 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
         borderStyle: "dashed",
       },
+    },
+    fileDropLabel: {
+      display: "flex",
+      flexDirection: "column",
     },
     errorText: {
       color: theme.palette.error.dark,
