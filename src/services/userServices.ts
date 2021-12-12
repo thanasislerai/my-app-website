@@ -10,7 +10,12 @@ const signUp = (email: string, password: string) =>
 
 const signOut = () => app?.auth().signOut();
 
-const storeUser = (userName: string, email: string, imageUrl?: string) =>
+const storeUser = (
+  userName: string,
+  email: string,
+  firebaseUid: string,
+  imageUrl?: string
+) =>
   requests.send<UserResponse>({
     method: "POST",
     url: "user",
@@ -18,6 +23,7 @@ const storeUser = (userName: string, email: string, imageUrl?: string) =>
       userName,
       email,
       imageUrl,
+      firebaseUid,
     },
   });
 

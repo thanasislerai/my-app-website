@@ -39,6 +39,8 @@ import ImageUpload from "../../common/ImageUpload";
 const PROFILE_AVATAR_SIZE = 200;
 const PROFILE_AVATAR_MOBILE_SIZE = 120;
 
+type SignUpParams = Omit<UserSignUpParams, "profilePic">;
+
 const SignUp = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
@@ -55,10 +57,12 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserSignUpParams>({});
+  } = useForm<SignUpParams>({});
 
-  const onSignUpFormSubmit = (signUpParams: UserSignUpParams) =>
-    dispatch(signUpUser(signUpParams));
+  const onSignUpFormSubmit = (signUpParams: SignUpParams) =>
+    dispatch(
+      signUpUser({ ...signUpParams, profilePic: profilePic?.[0]?.file })
+    );
 
   const handleErrorAlertClose = () => {
     setIsErrorAlertOpen(false);

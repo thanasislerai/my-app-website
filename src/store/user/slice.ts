@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+
+import { PROFILE_PICTURES_PATH } from "../../firebase";
+import { handleFileUpload } from "../../helpers/uploads";
 import userServices from "../../services/userServices";
 import type { CreateAsyncThunkTypes } from "../configure";
 
@@ -33,14 +36,20 @@ export const signUpUser = createAsyncThunk<
   CreateAsyncThunkTypes
 >(
   "user/signUp",
-  async ({ email, password, userName, imageUrl }, { rejectWithValue }) => {
+  async ({ email, password, userName, profilePic }, { rejectWithValue }) => {
     try {
       const { user: firebaseUser } =
         (await userServices.signUp(email, password)) || {};
       const token = await firebaseUser?.getIdToken();
+      const firebaseUid = firebaseUser?.uid as string;
+      const imageUrl = await handleFileUpload({
+        file: profilePic,
+        folder: `${PROFILE_PICTURES_PATH}/${firebaseUid}`,
+      });
       const { data: storedUser } = await userServices.storeUser(
         userName,
         email,
+        firebaseUid,
         imageUrl
       );
 

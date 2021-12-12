@@ -6,6 +6,7 @@ export interface User {
   email: firebase.User["email"];
   token?: string;
   imageUrl?: string;
+  firebaseUid: string;
 }
 
 export interface UserState {
@@ -24,7 +25,7 @@ export interface UserSignUpParams {
   userName: string;
   email: string;
   password: string;
-  imageUrl?: string;
+  profilePic?: File;
 }
 
 export interface UserResponse {
@@ -32,4 +33,5 @@ export interface UserResponse {
   userName: string;
   email: string;
   imageUrl?: string;
+  firebaseUid: string;
 }

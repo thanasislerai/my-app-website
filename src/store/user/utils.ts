@@ -9,5 +9,6 @@ export const constructUserObject = (
   email: userData.email,
   userName: userData.userName,
   imageUrl: userData.imageUrl,
+  firebaseUid: userData.firebaseUid,
   token,
 });
