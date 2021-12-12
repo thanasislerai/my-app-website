@@ -42,10 +42,12 @@ export const signUpUser = createAsyncThunk<
         (await userServices.signUp(email, password)) || {};
       const token = await firebaseUser?.getIdToken();
       const firebaseUid = firebaseUser?.uid as string;
-      const imageUrl = await handleFileUpload({
-        file: profilePic,
-        folder: `${PROFILE_PICTURES_PATH}/${firebaseUid}`,
-      });
+      const imageUrl = profilePic
+        ? await handleFileUpload({
+            file: profilePic,
+            folder: `${PROFILE_PICTURES_PATH}/${firebaseUid}`,
+          })
+        : undefined;
       const { data: storedUser } = await userServices.storeUser(
         userName,
         email,
