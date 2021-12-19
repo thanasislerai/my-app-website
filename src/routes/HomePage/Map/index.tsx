@@ -14,6 +14,10 @@ const MapComponent = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_API_TOKEN || "",
 });
 
+const mapEventWrapper = (
+  eventCallback: (arg1: MapboxMapType, arg2: MapMouseEvent) => void
+) => eventCallback as unknown as MapEvent;
+
 const Map = () => {
   const themeType = useSelector(themeTypeSelector);
   const isThemeDark = themeType === "dark";
@@ -46,7 +50,7 @@ const Map = () => {
       style={isThemeDark ? mapTiles.dark : mapTiles.light}
       bearing={[angle]}
       containerStyle={{ height: "100%", width: "100%" }}
-      onContextMenu={onMapRightClick as unknown as MapEvent}
+      onContextMenu={mapEventWrapper(onMapRightClick)}
     >
       <ZoomControl />
       <NewPhotoPopup
