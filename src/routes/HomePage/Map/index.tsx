@@ -14,7 +14,7 @@ const MapComponent = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_API_TOKEN || "",
 });
 
-const mapEventWrapper = (
+const mapMouseEventWrapper = (
   eventCallback: (arg1: MapboxMapType, arg2: MapMouseEvent) => void
 ) => eventCallback as unknown as MapEvent;
 
@@ -30,7 +30,7 @@ const Map = () => {
 
   const onAngleReset = () => setAngle(0);
 
-  const onMapRightClick = (map: MapboxMapType, event: MapMouseEvent) => {
+  const onMapClick = (map: MapboxMapType, event: MapMouseEvent) => {
     const currentZoom = map.getZoom();
     const center = event.lngLat;
     map.flyTo({
@@ -50,7 +50,7 @@ const Map = () => {
       style={isThemeDark ? mapTiles.dark : mapTiles.light}
       bearing={[angle]}
       containerStyle={{ height: "100%", width: "100%" }}
-      onContextMenu={mapEventWrapper(onMapRightClick)}
+      onClick={mapMouseEventWrapper(onMapClick)}
     >
       <ZoomControl />
       <NewPhotoPopup
