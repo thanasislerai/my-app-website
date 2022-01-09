@@ -9,6 +9,7 @@ import NewPhotoPopup from "./NewPhotoPopup";
 import { mapTiles } from "../../../constants/mapTiles";
 import RotationControl from "./RotationControl";
 import { themeTypeSelector } from "../../../store/selectors/theme";
+import PhotoMarker from "./PhotoMarker";
 
 const MapComponent = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_API_TOKEN || "",
@@ -53,6 +54,7 @@ const Map = () => {
       onClick={mapMouseEventWrapper(onMapClick)}
     >
       <ZoomControl />
+      <PhotoMarker coordinates={[-0.163611, 51.51961]} />
       <NewPhotoPopup
         position={newPhotoPopupPosition}
         onClose={onNewPhotoPopupClose}
