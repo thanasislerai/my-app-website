@@ -1,5 +1,15 @@
 import firebase from "firebase/app";
 
+export interface Photo {
+  id: string;
+  title?: string;
+  url: string;
+  userId: string;
+  lat: number;
+  lng: number;
+  isPublic: boolean;
+}
+
 export interface User {
   id: string;
   userName: string;
@@ -7,6 +17,7 @@ export interface User {
   token?: string;
   imageUrl?: string;
   firebaseUid: string;
+  photos: Photo[];
 }
 
 export interface UserState {

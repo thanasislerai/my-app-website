@@ -22,8 +22,9 @@ export const signInUser = createAsyncThunk<
     const { user } = (await userServices.signIn(email, password)) || {};
     const token = await user?.getIdToken();
     const { data: storedUser } = await userServices.getSelf(token);
+    const { data: photos } = await userServices.getOwnPhotos(token);
 
-    return constructUserObject(storedUser, token);
+    return constructUserObject(storedUser, photos, token);
   } catch (err: any) {
     const error: AxiosError<UserState["error"]> = err;
     return rejectWithValue(error.message);
@@ -55,7 +56,9 @@ export const signUpUser = createAsyncThunk<
         imageUrl
       );
 
-      return constructUserObject(storedUser, token);
+      const { data: photos } = await userServices.getOwnPhotos(token);
+
+      return constructUserObject(storedUser, photos, token);
     } catch (err: any) {
       const error: AxiosError<UserState["error"]> = err;
       return rejectWithValue(error.message);
@@ -72,8 +75,9 @@ export const getSelf = createAsyncThunk<
   async (token: string, { rejectWithValue }) => {
     try {
       const { data: userData } = await userServices.getSelf(token);
+      const { data: photos } = await userServices.getOwnPhotos(token);
 
-      return constructUserObject(userData, token);
+      return constructUserObject(userData, photos, token);
     } catch (err: any) {
       const error: AxiosError<UserState["error"]> = err;
       return rejectWithValue(error.message);

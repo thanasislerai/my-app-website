@@ -1,6 +1,6 @@
 import app from "../firebase";
 import requests from "../helpers/requests";
-import { UserResponse } from "../store/user/types";
+import { Photo, UserResponse } from "../store/user/types";
 
 const signIn = (email: string, password: string) =>
   app?.auth().signInWithEmailAndPassword(email, password);
@@ -34,10 +34,18 @@ const getSelf = (token?: string) =>
     token,
   });
 
+const getOwnPhotos = (token?: string) =>
+  requests.send<Photo[]>({
+    method: "GET",
+    url: "photo/own",
+    token,
+  });
+
 export default {
   signIn,
   signUp,
   signOut,
   storeUser,
   getSelf,
+  getOwnPhotos,
 };

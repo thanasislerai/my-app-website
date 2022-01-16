@@ -1,24 +1,30 @@
 import { Marker } from "react-mapbox-gl";
 import { Card, CardMedia, makeStyles } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { userInfoSelector } from "../../../store/selectors/user";
+import { Photo } from "../../../store/user/types";
 
 const TOOLTIP_ARROW_SIZE = 5;
 const MARKER_SIZE = 96;
 
-const PhotoMarker = ({ coordinates }: PhotoMarkerProps) => {
+const PhotoMarkers = ({ photos }: PhotoMarkersProps) => {
   const classes = useStyles();
-  const { imageUrl } = useSelector(userInfoSelector) || {};
 
-  return imageUrl ? (
-    <Marker coordinates={coordinates}>
-      <div className={classes.root}>
-        <Card className={classes.card}>
-          <CardMedia className={classes.media} image={imageUrl} />
-        </Card>
-      </div>
-    </Marker>
-  ) : null;
+  if (!photos) {
+    return null;
+  }
+
+  return (
+    <>
+      {photos.map(({ id, lat, lng, url }) => (
+        <Marker key={id} coordinates={[lng, lat]}>
+          <div className={classes.root}>
+            <Card className={classes.card}>
+              <CardMedia className={classes.media} image={url} />
+            </Card>
+          </div>
+        </Marker>
+      ))}
+    </>
+  );
 };
 
 const useStyles = makeStyles(() => ({
@@ -49,8 +55,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface PhotoMarkerProps {
-  coordinates: [number, number];
+interface PhotoMarkersProps {
+  photos?: Photo[];
 }
 
-export default PhotoMarker;
+export default PhotoMarkers;

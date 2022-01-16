@@ -6,10 +6,11 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useSelector } from "react-redux";
 
 import NewPhotoPopup from "./NewPhotoPopup";
-import { mapTiles } from "../../../constants/mapTiles";
+import PhotoMarkers from "./PhotoMarkers";
 import RotationControl from "./RotationControl";
+import { mapTiles } from "../../../constants/mapTiles";
 import { themeTypeSelector } from "../../../store/selectors/theme";
-import PhotoMarker from "./PhotoMarker";
+import { userInfoSelector } from "../../../store/selectors/user";
 
 const MapComponent = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_API_TOKEN || "",
@@ -20,6 +21,7 @@ const mapMouseEventWrapper = (
 ) => eventCallback as unknown as MapEvent;
 
 const Map = () => {
+  const user = useSelector(userInfoSelector);
   const themeType = useSelector(themeTypeSelector);
   const isThemeDark = themeType === "dark";
   const [angle, setAngle] = useState(0);
@@ -54,7 +56,7 @@ const Map = () => {
       onClick={mapMouseEventWrapper(onMapClick)}
     >
       <ZoomControl />
-      <PhotoMarker coordinates={[-0.163611, 51.51961]} />
+      <PhotoMarkers photos={user?.photos} />
       <NewPhotoPopup
         position={newPhotoPopupPosition}
         onClose={onNewPhotoPopupClose}
