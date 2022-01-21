@@ -7,6 +7,8 @@ import {
   CardHeader,
   PaletteType,
   IconButton,
+  CardActions,
+  Button,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { LngLat } from "mapbox-gl";
@@ -27,7 +29,7 @@ const NewPhotoPopup = ({ position, onClose }: NewPhotoPopupProps) => {
       <Card className={classes.popup} elevation={3}>
         <CardHeader
           title="What happened here?"
-          subheader="Is there a good memory you would like to share here?"
+          subheader="Did something special happen here that you would like to share?"
           titleTypographyProps={{ variant: "h6" }}
           subheaderTypographyProps={{ variant: "subtitle2" }}
           action={
@@ -36,6 +38,10 @@ const NewPhotoPopup = ({ position, onClose }: NewPhotoPopupProps) => {
             </IconButton>
           }
         />
+        <CardActions className={classes.buttonsWraper}>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button>Add Photos</Button>
+        </CardActions>
       </Card>
     </MapboxPopup>
   ) : null;
@@ -72,6 +78,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor:
         themeType === "dark" ? DARK_BACKGROUND_COLOR : LIGHT_BACKGROUND_COLOR,
     }),
+    buttonsWraper: {
+      justifyContent: "flex-end",
+    },
   })
 );
 
