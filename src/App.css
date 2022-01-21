@@ -9,3 +9,7 @@ body {
   flex-direction: column;
   height: 100%;
 }
+
+.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
+  display: none;
+}
