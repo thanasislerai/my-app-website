@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
 
 import { PROFILE_PICTURES_PATH } from "../../firebase";
 import { handleFileUpload } from "../../helpers/uploads";
 import userServices from "../../services/userServices";
 import type { CreateAsyncThunkTypes } from "../configure";
+import { getAxiosErrorMessage } from "../utils/errors";
 
 import { UserSignInParams, UserSignUpParams, UserState } from "./types";
 import { constructUserObject } from "./utils";
@@ -25,9 +25,8 @@ export const signInUser = createAsyncThunk<
     const { data: photos } = await userServices.getOwnPhotos(token);
 
     return constructUserObject(storedUser, photos, token);
-  } catch (err: any) {
-    const error: AxiosError<UserState["error"]> = err;
-    return rejectWithValue(error.message);
+  } catch (err) {
+    return rejectWithValue(getAxiosErrorMessage(err));
   }
 });
 
@@ -59,9 +58,8 @@ export const signUpUser = createAsyncThunk<
       const { data: photos } = await userServices.getOwnPhotos(token);
 
       return constructUserObject(storedUser, photos, token);
-    } catch (err: any) {
-      const error: AxiosError<UserState["error"]> = err;
-      return rejectWithValue(error.message);
+    } catch (err) {
+      return rejectWithValue(getAxiosErrorMessage(err));
     }
   }
 );
@@ -78,9 +76,8 @@ export const getSelf = createAsyncThunk<
       const { data: photos } = await userServices.getOwnPhotos(token);
 
       return constructUserObject(userData, photos, token);
-    } catch (err: any) {
-      const error: AxiosError<UserState["error"]> = err;
-      return rejectWithValue(error.message);
+    } catch (err) {
+      return rejectWithValue(getAxiosErrorMessage(err));
     }
   },
   {
@@ -102,9 +99,8 @@ export const signOutUser = createAsyncThunk<
   try {
     await userServices.signOut();
     return undefined;
-  } catch (err: any) {
-    const error: AxiosError<UserState["error"]> = err;
-    return rejectWithValue(error.message);
+  } catch (err) {
+    return rejectWithValue(getAxiosErrorMessage(err));
   }
 });
 
