@@ -35,7 +35,7 @@ const Map = () => {
 
   const onMapClick = (map: MapboxMapType, event: MapMouseEvent) => {
     const currentZoom = map.getZoom();
-    const center = event.lngLat;
+    const { lngLat: center } = event;
     map.flyTo({
       center,
       animate: true,
