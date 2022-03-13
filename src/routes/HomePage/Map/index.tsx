@@ -11,6 +11,7 @@ import RotationControl from "./RotationControl";
 import { mapTiles } from "../../../constants/mapTiles";
 import { themeTypeSelector } from "../../../store/selectors/theme";
 import { userInfoSelector } from "../../../store/selectors/user";
+import { getPhotoCoordinates } from "../../../store/utils/photos";
 
 const MapComponent = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_API_TOKEN || "",
@@ -26,6 +27,8 @@ const Map = () => {
   const isThemeDark = themeType === "dark";
   const [angle, setAngle] = useState(0);
   const [newPhotoPopupPosition, setNewPhotoPopupPosition] = useState<LngLat>();
+  const { photos: userPhotos } = user || {};
+  const initialCenter = getPhotoCoordinates(userPhotos?.[0]);
 
   const onMapRotate = (map: MapboxMapType) => {
     setAngle(map.getBearing());
@@ -54,6 +57,7 @@ const Map = () => {
       bearing={[angle]}
       containerStyle={{ height: "100%", width: "100%" }}
       onClick={mapMouseEventWrapper(onMapClick)}
+      center={initialCenter}
     >
       <ZoomControl />
       <PhotoMarkers photos={user?.photos} />

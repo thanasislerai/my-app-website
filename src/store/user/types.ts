@@ -8,6 +8,8 @@ export interface Photo {
   lat: number;
   lng: number;
   isPublic: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface User {
