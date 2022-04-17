@@ -5,8 +5,9 @@ import { Photo } from "../../../store/user/types";
 const TOOLTIP_ARROW_SIZE = 5;
 const MARKER_SIZE = 96;
 
-const PhotoMarkers = ({ photos }: PhotoMarkersProps) => {
+const PhotoMarkers = ({ photos, onMarkerClick }: PhotoMarkersProps) => {
   const classes = useStyles();
+  const onClick = (photo: Photo) => () => onMarkerClick(photo);
 
   if (!photos) {
     return null;
@@ -14,11 +15,15 @@ const PhotoMarkers = ({ photos }: PhotoMarkersProps) => {
 
   return (
     <>
-      {photos.map(({ id, lat, lng, url }) => (
-        <Marker key={id} coordinates={[lng, lat]}>
+      {photos.map((photo) => (
+        <Marker
+          onClick={onClick(photo)}
+          key={photo.id}
+          coordinates={[photo.lng, photo.lat]}
+        >
           <div className={classes.root}>
             <Card className={classes.card}>
-              <CardMedia className={classes.media} image={url} />
+              <CardMedia className={classes.media} image={photo.url} />
             </Card>
           </div>
         </Marker>
@@ -29,6 +34,7 @@ const PhotoMarkers = ({ photos }: PhotoMarkersProps) => {
 
 const useStyles = makeStyles(() => ({
   root: {
+    cursor: "pointer",
     position: "relative",
     "&:after": {
       content: "''",
@@ -57,6 +63,7 @@ const useStyles = makeStyles(() => ({
 
 interface PhotoMarkersProps {
   photos?: Photo[];
+  onMarkerClick: (photo: Photo) => void;
 }
 
 export default PhotoMarkers;
